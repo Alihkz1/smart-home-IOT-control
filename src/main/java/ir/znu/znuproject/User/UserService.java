@@ -14,24 +14,37 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public Response<User> findAll() {
+        Response response = new Response();
+        response.setData(userRepository.findAll());
+        return response;
     }
 
-    public boolean saveUser(User user) {
+    public Response saveUser(User user) {
+        /*todo : check duplicate username*/
+        Response response = new Response();
         try {
             userRepository.save(user);
-            return true;
+            response.setStatus(200);
+            response.setMessage("User successfully saved!");
         } catch (Exception e) {
-            return false;
+            response.setStatus(500);
+            response.setMessage("Error Occurred !");
         }
+        return response;
     }
 
-    public boolean login(String username) {
+    public Response login(String username) {
+        Response response = new Response();
         User userExists = userRepository.login(username);
-        if (userExists != null)
-            return true;
-        else return false;
+        if (userExists != null) {
+            response.setStatus(200);
+            response.setMessage("successful login!");
+        } else {
+            response.setStatus(500);
+            response.setMessage("Error Occurred !");
+        }
+        return response;
     }
 
 

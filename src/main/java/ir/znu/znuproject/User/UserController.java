@@ -1,6 +1,7 @@
 package ir.znu.znuproject.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,17 +18,17 @@ public class UserController {
     }
 
     @GetMapping(path = "list")
-    List<User> getUserList() {
+    Response<User> getUserList() {
         return userService.findAll();
     }
 
-    @PostMapping
-    Boolean saveUser(@RequestBody(required = true) User user) {
+    @PostMapping(path = "save")
+    Response saveUser(@RequestBody(required = true) User user) {
         return userService.saveUser(user);
     }
 
     @PostMapping(path = "login")
-    Boolean login(@RequestBody(required = true) UserModel model) {
+    Response login(@RequestBody(required = true) User model) {
         return userService.login(model.getUsername());
     }
 }
