@@ -39,7 +39,6 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "ID=" + ID +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", expireDate=" + expireDate +

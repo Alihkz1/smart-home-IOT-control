@@ -29,20 +29,20 @@ public class UserService {
             response.setMessage("User successfully saved!");
         } catch (Exception e) {
             response.setStatus(500);
-            response.setMessage("Error Occurred !");
+            response.setMessage("Error occurred!");
         }
         return response;
     }
 
-    public Response login(String username) {
+    public Response login(User user) {
         Response response = new Response();
-        User userExists = userRepository.login(username);
+        User userExists = userRepository.login(user.getUsername(), user.getPassword());
         if (userExists != null) {
             response.setStatus(200);
             response.setMessage("successful login!");
         } else {
             response.setStatus(500);
-            response.setMessage("Error Occurred !");
+            response.setMessage("Error occurred!");
         }
         return response;
     }

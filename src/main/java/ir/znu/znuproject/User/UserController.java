@@ -29,6 +29,6 @@ public class UserController {
 
     @PostMapping(path = "login")
     Response login(@RequestBody(required = true) User model) {
-        return userService.login(model.getUsername());
+        return userService.login(model);
     }
 }
