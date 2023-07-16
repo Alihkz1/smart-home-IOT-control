@@ -1,5 +1,6 @@
 package ir.znu.znuproject.Log;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -11,7 +12,9 @@ public class Log {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long ID;
+    @JsonProperty("content")
     private String content;
+    @JsonProperty("date")
     private LocalDate date;
 
     public Log() {

@@ -1,4 +1,4 @@
-package ir.znu.znuproject.User;
+package ir.znu.znuproject.shared;
 
 import java.util.List;
 
