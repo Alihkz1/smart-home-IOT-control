@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Query(value = "select * from User where username = ?1", nativeQuery = true)
-    boolean login(String username);
+    @Query(value = "select * from users where username = ?1", nativeQuery = true)
+    User login(String username);
 }

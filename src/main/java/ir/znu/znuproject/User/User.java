@@ -5,19 +5,11 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table
+@Table(name = "users")
 public class User {
-    @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
     private String username;
     private String password;
@@ -37,6 +29,16 @@ public class User {
         this.username = username;
         this.password = password;
         this.expireDate = expireDate;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "ID=" + ID +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", expireDate=" + expireDate +
+                '}';
     }
 
     public Long getID() {
