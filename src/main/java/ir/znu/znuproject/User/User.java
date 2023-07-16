@@ -9,13 +9,13 @@ import java.time.LocalDate;
 public class User {
     @Id
     @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
+            name = "users",
+            sequenceName = "users",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
+            generator = "users"
     )
 
     private Long ID;

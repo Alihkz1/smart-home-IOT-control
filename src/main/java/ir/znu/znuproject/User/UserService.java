@@ -1,7 +1,6 @@
 package ir.znu.znuproject.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,10 +28,10 @@ public class UserService {
     }
 
     public boolean login(User user) {
-        Boolean userExists = userRepository.login(user.getUsername());
-        if (userExists)
+        User userExists = userRepository.login(user.getUsername());
+        if (userExists != null)
             return true;
-        else throw new IllegalStateException("User Not Found!");
+        else return false;
     }
 
 
