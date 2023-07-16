@@ -14,7 +14,7 @@ public class UserConfig {
         return args -> {
             User ali = new User(1L, "alien@gmail.com", "654321", LocalDate.of(2001, 1, 18));
             User omid = new User(2L, "omid@gmail.com", "654321", LocalDate.of(2007, 3, 25));
-            repo.saveAll(List.of(ali));
+            repo.saveAll(List.of(ali,omid));
         };
     }
 

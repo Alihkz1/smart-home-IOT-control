@@ -21,7 +21,6 @@ public class User {
     private Long ID;
     private String username;
     private String password;
-
     private LocalDate expireDate;
 
     public User() {
@@ -38,5 +37,21 @@ public class User {
         this.username = username;
         this.password = password;
         this.expireDate = expireDate;
+    }
+
+    public Long getID() {
+        return ID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public LocalDate getExpireDate() {
+        return expireDate;
     }
 }
