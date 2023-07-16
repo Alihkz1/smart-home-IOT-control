@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping(path = "login")
-    Boolean login(@RequestBody(required = true) User user) {
-        return userService.login(user);
+    Boolean login(@RequestBody(required = true) UserModel model) {
+        return userService.login(model.getUsername());
     }
 }

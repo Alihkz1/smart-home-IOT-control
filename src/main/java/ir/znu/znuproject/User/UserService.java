@@ -27,8 +27,8 @@ public class UserService {
         }
     }
 
-    public boolean login(User user) {
-        User userExists = userRepository.login(user.getUsername());
+    public boolean login(String username) {
+        User userExists = userRepository.login(username);
         if (userExists != null)
             return true;
         else return false;
