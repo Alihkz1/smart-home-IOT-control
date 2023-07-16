@@ -2,10 +2,7 @@ package ir.znu.znuproject.Log;
 
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,11 @@ public class LogController {
         Response response = new Response<Log>();
         response.setData(logService.getList());
         return response;
+    }
+
+    @PostMapping(path = "add")
+    Response addLog(@RequestBody(required = true) Log log){
+        return logService.addLog(log.getContent());
+
     }
 }

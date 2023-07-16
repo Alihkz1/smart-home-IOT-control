@@ -13,7 +13,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("ID")
     private Long ID;
-    @JsonProperty("username")
+    @JsonProperty("username")   
     private String username;
     @JsonProperty("password")
     private String password;
