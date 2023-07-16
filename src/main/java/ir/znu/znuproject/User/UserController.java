@@ -22,7 +22,7 @@ public class UserController {
         return userService.findAll();
     }
 
-    @PostMapping(path = "save")
+    @PostMapping(path = "register")
     Response saveUser(@RequestBody(required = true) User user) {
         return userService.saveUser(user);
     }
