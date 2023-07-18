@@ -1,6 +1,8 @@
-package ir.znu.znuproject.Log;
+package ir.znu.znuproject.service;
 
-import ir.znu.znuproject.User.User;
+import ir.znu.znuproject.entity.Log;
+import ir.znu.znuproject.entity.User;
+import ir.znu.znuproject.repository.LogRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

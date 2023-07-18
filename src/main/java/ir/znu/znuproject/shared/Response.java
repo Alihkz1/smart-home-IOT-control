@@ -1,9 +1,5 @@
 package ir.znu.znuproject.shared;
 
-import ir.znu.znuproject.Log.Log;
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

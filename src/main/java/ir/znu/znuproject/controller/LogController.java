@@ -1,5 +1,7 @@
-package ir.znu.znuproject.Log;
+package ir.znu.znuproject.controller;
 
+import ir.znu.znuproject.entity.Log;
+import ir.znu.znuproject.service.LogService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,8 @@
-package ir.znu.znuproject.User;
+package ir.znu.znuproject.service;
 
+import ir.znu.znuproject.entity.User;
+import ir.znu.znuproject.repository.UserRepository;
 import ir.znu.znuproject.shared.Response;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,5 +1,7 @@
-package ir.znu.znuproject.User;
+package ir.znu.znuproject.controller;
 
+import ir.znu.znuproject.entity.User;
+import ir.znu.znuproject.service.UserService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

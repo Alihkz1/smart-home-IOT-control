@@ -1,8 +1,7 @@
-package ir.znu.znuproject.Log;
+package ir.znu.znuproject.repository;
 
-import ir.znu.znuproject.User.User;
+import ir.znu.znuproject.entity.Log;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository

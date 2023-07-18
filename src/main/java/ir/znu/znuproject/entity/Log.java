@@ -1,4 +1,4 @@
-package ir.znu.znuproject.Log;
+package ir.znu.znuproject.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;

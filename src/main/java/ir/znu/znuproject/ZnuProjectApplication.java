@@ -1,17 +1,15 @@
 package ir.znu.znuproject;
 
-import ir.znu.znuproject.Log.Log;
-import ir.znu.znuproject.Log.LogRepository;
-import ir.znu.znuproject.Log.LogService;
-import ir.znu.znuproject.User.User;
-import ir.znu.znuproject.User.UserRepository;
+import ir.znu.znuproject.entity.Log;
+import ir.znu.znuproject.repository.LogRepository;
+import ir.znu.znuproject.entity.User;
+import ir.znu.znuproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
