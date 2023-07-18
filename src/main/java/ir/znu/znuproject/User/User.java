@@ -2,33 +2,29 @@ package ir.znu.znuproject.User;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("ID")
     private Long ID;
-    @JsonProperty("username")   
+    @JsonProperty("username")
     private String username;
     @JsonProperty("password")
     private String password;
     @JsonProperty("expireDate")
     private LocalDate expireDate;
-
-    public User() {
-    }
-
-    public User(Long ID, String username, String password, LocalDate expireDate) {
-        this.ID = ID;
-        this.username = username;
-        this.password = password;
-        this.expireDate = expireDate;
-    }
 
     public User(String username, String password, LocalDate expireDate) {
         this.username = username;
@@ -45,19 +41,4 @@ public class User {
                 '}';
     }
 
-    public Long getID() {
-        return ID;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public LocalDate getExpireDate() {
-        return expireDate;
-    }
 }
