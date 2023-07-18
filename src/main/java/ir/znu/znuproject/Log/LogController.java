@@ -1,10 +1,13 @@
 package ir.znu.znuproject.Log;
 
 import ir.znu.znuproject.shared.Response;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController()
 @RequestMapping("api/v1/logs")
@@ -19,13 +22,11 @@ public class LogController {
 
     @GetMapping(path = "list")
     Response<Log> getList() {
-        Response response = new Response<Log>();
-        response.setData(logService.getList());
-        return response;
+        return logService.getList();
     }
 
     @PostMapping(path = "add")
-    Response addLog(@RequestBody(required = true) Log log){
+    Response addLog(@RequestBody(required = true) Log log) {
         return logService.addLog(log.getContent());
 
     }

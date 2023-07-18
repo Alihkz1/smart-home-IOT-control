@@ -1,8 +1,13 @@
 package ir.znu.znuproject.User;
 
 import ir.znu.znuproject.shared.Response;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -14,8 +19,10 @@ public class UserService {
     }
 
     public Response<User> findAll() {
+        Map map = new HashMap<String, List<User>>();
+        map.put("users",userRepository.findAll());
         Response response = new Response();
-        response.setData(userRepository.findAll());
+        response.setData(map);
         return response;
     }
 

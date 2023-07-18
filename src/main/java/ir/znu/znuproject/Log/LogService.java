@@ -1,11 +1,14 @@
 package ir.znu.znuproject.Log;
 
+import ir.znu.znuproject.User.User;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class LogService {
@@ -16,8 +19,12 @@ public class LogService {
         this.logRepository = logRepository;
     }
 
-    public List<Log> getList() {
-        return logRepository.findAll();
+    public Response<Log> getList() {
+        Map map = new HashMap<String, List<User>>();
+        map.put("logs",logRepository.findAll());
+        Response response = new Response();
+        response.setData(map);
+        return response;
     }
 
     public Response addLog(String content) {
