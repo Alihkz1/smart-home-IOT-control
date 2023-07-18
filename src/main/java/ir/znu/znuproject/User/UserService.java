@@ -19,16 +19,25 @@ public class UserService {
     }
 
     public Response<User> findAll() {
-        Map map = new HashMap<String, List<User>>();
-        map.put("users",userRepository.findAll());
         Response response = new Response();
-        response.setData(map);
+        Map map = new HashMap<String, List<User>>();
+
+        try {
+            map.put("users", userRepository.findAll());
+            response.setData(map);
+            response.setStatus(200);
+        } catch (Exception e) {
+            response.setStatus(500);
+            response.setMessage("Error occurred!");
+        }
+
         return response;
     }
 
     public Response saveUser(User user) {
         /*todo : check duplicate username*/
         Response response = new Response();
+
         try {
             userRepository.save(user);
             response.setStatus(200);
@@ -37,19 +46,22 @@ public class UserService {
             response.setStatus(500);
             response.setMessage("Error occurred!");
         }
+
         return response;
     }
 
     public Response login(User user) {
         Response response = new Response();
         User userExists = userRepository.login(user.getUsername(), user.getPassword());
+
         if (userExists != null) {
             response.setStatus(200);
             response.setMessage("successful login!");
         } else {
             response.setStatus(500);
-            response.setMessage("Error occurred!");
+            response.setMessage("Incorrect username or password!");
         }
+
         return response;
     }
 

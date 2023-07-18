@@ -20,18 +20,27 @@ public class LogService {
     }
 
     public Response<Log> getList() {
-        Map map = new HashMap<String, List<User>>();
-        map.put("logs",logRepository.findAll());
         Response response = new Response();
-        response.setData(map);
+        Map map = new HashMap<String, List<User>>();
+
+        try {
+            map.put("logs", logRepository.findAll());
+            response.setData(map);
+            response.setStatus(200);
+        } catch (Exception e) {
+            response.setStatus(500);
+            response.setMessage("Error occurred!");
+        }
+
         return response;
     }
 
-    public Response addLog(String content) {
+    public Response saveNewLog(String content) {
         Log savingLog = new Log();
+        Response response = new Response();
+
         savingLog.setContent(content);
         savingLog.setDate(LocalDate.now());
-        Response response = new Response();
         try {
             logRepository.save(savingLog);
             response.setStatus(200);
@@ -39,7 +48,6 @@ public class LogService {
         } catch (Exception e) {
             response.setStatus(500);
             response.setMessage(e.toString());
-
         }
         return response;
     }
