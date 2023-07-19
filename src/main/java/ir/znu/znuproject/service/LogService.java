@@ -1,5 +1,7 @@
 package ir.znu.znuproject.service;
 
+import ir.znu.znuproject.dto.LogDTO;
+import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.entity.Log;
 import ir.znu.znuproject.entity.User;
 import ir.znu.znuproject.repository.LogRepository;
@@ -11,6 +13,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class LogService {
@@ -23,10 +26,10 @@ public class LogService {
 
     public Response<Log> getList() {
         Response response = new Response();
-        Map map = new HashMap<String, List<User>>();
-
+        Map map = new HashMap<String, List<UserDTO>>();
+        List<LogDTO> logs = logRepository.findAll().stream().map(this::convertEntityToDTO).collect(Collectors.toList());
         try {
-            map.put("logs", logRepository.findAll());
+            map.put("logs", logs);
             response.setData(map);
             response.setStatus(200);
         } catch (Exception e) {
@@ -52,5 +55,12 @@ public class LogService {
             response.setMessage(e.toString());
         }
         return response;
+    }
+
+    private LogDTO convertEntityToDTO(Log log) {
+        LogDTO dto = new LogDTO();
+        dto.setContent(log.getContent());
+        dto.setDate(log.getDate());
+        return dto;
     }
 }
