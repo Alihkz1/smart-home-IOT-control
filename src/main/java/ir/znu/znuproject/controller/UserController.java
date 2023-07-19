@@ -23,8 +23,8 @@ public class UserController {
     }
 
     @PostMapping(path = "register")
-    Response saveUser(@RequestBody(required = true) User user) {
-        return userService.saveUser(user);
+    Response register(@RequestBody(required = true) User user) {
+        return userService.register(user);
     }
 
     @PostMapping(path = "login")

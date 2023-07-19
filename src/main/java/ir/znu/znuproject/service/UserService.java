@@ -6,9 +6,8 @@ import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -35,19 +34,26 @@ public class UserService {
         return response;
     }
 
-    public Response saveUser(User user) {
-        /*todo : check duplicate username*/
+    public Response register(User user) {
         Response response = new Response();
-
-        try {
-            userRepository.save(user);
-            response.setStatus(200);
-            response.setMessage("User successfully saved!");
-        } catch (Exception e) {
-            response.setStatus(500);
-            response.setMessage("Error occurred!");
+        Optional<User> existUser = userRepository.findAll().stream().filter(el -> Objects.equals(el.getUsername(), user.getUsername())).findFirst();
+        if (existUser.isPresent()) {
+            response.setStatus(400);
+            response.setMessage("Username already taken!");
+        } else {
+            try {
+                User savingUser = new User();
+                savingUser.setUsername(user.getUsername());
+                savingUser.setPassword(user.getPassword());
+                savingUser.setExpireDate(LocalDate.of(LocalDate.now().getYear() + 1, LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth()));
+                userRepository.save(savingUser);
+                response.setStatus(200);
+                response.setMessage("User successfully saved!");
+            } catch (Exception e) {
+                response.setStatus(500);
+                response.setMessage("Error occurred!");
+            }
         }
-
         return response;
     }
 
