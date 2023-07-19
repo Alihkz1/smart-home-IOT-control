@@ -1,5 +1,6 @@
 package ir.znu.znuproject.service;
 
+import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.entity.User;
 import ir.znu.znuproject.repository.UserRepository;
 import ir.znu.znuproject.shared.Response;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -18,19 +20,18 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Response<User> findAll() {
+    public Response<UserDTO> findAll() {
         Response response = new Response();
-        Map map = new HashMap<String, List<User>>();
-
+        Map map = new HashMap<String, List<UserDTO>>();
+        List<UserDTO> users = userRepository.findAll().stream().map(this::convertEntityToDTO).collect(Collectors.toList());
         try {
-            map.put("users", userRepository.findAll());
+            map.put("users", users);
             response.setData(map);
             response.setStatus(200);
         } catch (Exception e) {
             response.setStatus(500);
             response.setMessage("Error occurred!");
         }
-
         return response;
     }
 
@@ -72,5 +73,12 @@ public class UserService {
         return response;
     }
 
+    private UserDTO convertEntityToDTO(User user) {
+        UserDTO dto = new UserDTO();
+        dto.setUsername(user.getUsername());
+        dto.setPassword(user.getPassword());
+        dto.setExpireDate(user.getExpireDate());
+        return dto;
+    }
 
 }

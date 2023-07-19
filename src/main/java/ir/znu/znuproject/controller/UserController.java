@@ -1,5 +1,6 @@
 package ir.znu.znuproject.controller;
 
+import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.entity.User;
 import ir.znu.znuproject.service.UserService;
 import ir.znu.znuproject.shared.Response;
@@ -18,7 +19,7 @@ public class UserController {
     }
 
     @GetMapping(path = "list")
-    Response<User> getUserList() {
+    Response<UserDTO> getUserList() {
         return userService.findAll();
     }
 
