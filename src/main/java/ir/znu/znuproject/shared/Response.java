@@ -1,42 +1,21 @@
 package ir.znu.znuproject.shared;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
 import java.util.Map;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class Response<T> {
     private int status;
     private String message = "";
-
     private Map<String, List<T>> data;
 
-    public Response() {
-    }
-
     public Response(Map<String, List<T>> data) {
-        this.data = data;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Map<String, List<T>> getData() {
-        return data;
-    }
-
-    public void setData(Map<String, List<T>> data) {
         this.data = data;
     }
 
