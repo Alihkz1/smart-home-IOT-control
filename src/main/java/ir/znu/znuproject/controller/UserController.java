@@ -27,12 +27,12 @@ public class UserController {
     }
 
     @PostMapping(path = "register")
-    Response register(@RequestBody(required = true) User user) {
+    ResponseEntity<Response<String>>  register(@RequestBody(required = true) User user) {
         return userService.register(user);
     }
 
     @PostMapping(path = "login")
-    Response login(@RequestBody(required = true) User model) {
+    ResponseEntity<Response<String>> login(@RequestBody(required = true) User model) {
         return userService.login(model);
     }
 }

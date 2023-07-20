@@ -4,6 +4,7 @@ import ir.znu.znuproject.entity.Log;
 import ir.znu.znuproject.service.LogService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController()
@@ -18,12 +19,12 @@ public class LogController {
     }
 
     @GetMapping(path = "list")
-    Response<Log> getLogList() {
+    ResponseEntity<Response<Log>> getLogList() {
         return logService.getList();
     }
 
     @PostMapping(path = "add")
-    Response saveNewLog(@RequestBody(required = true) Log log) {
+    ResponseEntity<Response> saveNewLog(@RequestBody(required = true) Log log) {
         return logService.saveNewLog(log.getContent());
 
     }

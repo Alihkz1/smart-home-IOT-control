@@ -37,12 +37,13 @@ public class UserService {
         }
     }
 
-    public Response register(User user) {
-        Response response = new Response();
+    public ResponseEntity<Response<String>> register(User user) {
+        Response<String> response = new Response();
         Optional<User> existUser = userRepository.findAll().stream().filter(el -> Objects.equals(el.getUsername(), user.getUsername())).findFirst();
         if (existUser.isPresent()) {
             response.setStatus(400);
-            response.setMessage("Username already taken!");
+            response.setMessage("Email Already Taken");
+            return ResponseEntity.badRequest().body(response);
         } else {
             try {
                 User savingUser = new User();
@@ -52,27 +53,27 @@ public class UserService {
                 userRepository.save(savingUser);
                 response.setStatus(200);
                 response.setMessage("User successfully saved!");
+                return ResponseEntity.ok().body(response);
             } catch (Exception e) {
-                response.setStatus(500);
-                response.setMessage("Error occurred!");
+                response.setMessage("Internal Server Error!");
+                return ResponseEntity.internalServerError().body(response);
             }
         }
-        return response;
     }
 
-    public Response login(User user) {
+    public ResponseEntity<Response<String>> login(User user) {
         Response response = new Response();
         User userExists = userRepository.login(user.getUsername(), user.getPassword());
 
         if (userExists != null) {
             response.setStatus(200);
             response.setMessage("successful login!");
+            return ResponseEntity.ok().body(response);
         } else {
-            response.setStatus(500);
+            response.setStatus(400);
             response.setMessage("Incorrect username or password!");
+            return ResponseEntity.badRequest().body(response);
         }
-
-        return response;
     }
 
     private UserDTO convertEntityToDTO(User user) {
