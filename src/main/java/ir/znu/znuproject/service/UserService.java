@@ -5,6 +5,7 @@ import ir.znu.znuproject.entity.User;
 import ir.znu.znuproject.repository.UserRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,19 +21,20 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Response<UserDTO> findAll() {
+    public ResponseEntity<Response<Map<String, UserDTO>>> findAll() {
         Response response = new Response();
         Map map = new HashMap<String, List<UserDTO>>();
-        List<UserDTO> users = userRepository.findAll().stream().map(this::convertEntityToDTO).collect(Collectors.toList());
+
         try {
+            List<UserDTO> users = userRepository.findAll().stream().map(this::convertEntityToDTO).collect(Collectors.toList());
             map.put("users", users);
             response.setData(map);
             response.setStatus(200);
+            return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setStatus(500);
-            response.setMessage("Error occurred!");
+            return ResponseEntity.internalServerError().body(response);
         }
-        return response;
     }
 
     public Response register(User user) {
