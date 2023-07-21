@@ -6,6 +6,8 @@ import ir.znu.znuproject.service.UserService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -31,8 +33,10 @@ public class UserController {
         return userService.register(user);
     }
 
+//    @PreAuthorize()
     @PostMapping(path = "login")
     ResponseEntity<Response<String>> login(@RequestBody(required = true) User model) {
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getCredentials();
         return userService.login(model);
     }
 }
