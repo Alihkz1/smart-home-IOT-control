@@ -3,9 +3,11 @@ package ir.znu.znuproject.service;
 import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.entity.User;
 import ir.znu.znuproject.repository.UserRepository;
+import ir.znu.znuproject.shared.JWTService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,10 +17,16 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final JWTService jwtService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository,
+                       JWTService jwtService,
+                       PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.jwtService = jwtService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public ResponseEntity<Response<Map<String, UserDTO>>> findAll() {
@@ -63,11 +71,15 @@ public class UserService {
 
     public ResponseEntity<Response<String>> login(User user) {
         Response response = new Response();
-        User userExists = userRepository.login(user.getUsername(), user.getPassword());
+        User userExists = userRepository.login(user.getUsername(), passwordEncoder.encode(user.getPassword()));
 
         if (userExists != null) {
+            var token = jwtService.generateToken(user);
+            Map map = new HashMap<String, String>();
+            map.put("token", token);
             response.setStatus(200);
             response.setMessage("successful login!");
+            response.setData(map);
             return ResponseEntity.ok().body(response);
         } else {
             response.setStatus(400);

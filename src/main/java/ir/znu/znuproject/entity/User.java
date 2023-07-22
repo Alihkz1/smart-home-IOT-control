@@ -1,16 +1,21 @@
 package ir.znu.znuproject.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
+
+import ir.znu.znuproject.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -31,10 +36,15 @@ public class User implements UserDetails {
     @JsonProperty("expireDate")
     private LocalDate expireDate;
 
-    public User(String username, String password, LocalDate expireDate) {
+    @JsonProperty("role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public User(String username, String password, LocalDate expireDate, Role role) {
         this.username = username;
         this.password = password;
         this.expireDate = expireDate;
+        this.role = role;
     }
 
     @Override
@@ -48,7 +58,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
