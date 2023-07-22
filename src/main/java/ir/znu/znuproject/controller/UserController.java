@@ -1,7 +1,7 @@
 package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.dto.UserDTO;
-import ir.znu.znuproject.entity.User;
+import ir.znu.znuproject.model.User;
 import ir.znu.znuproject.service.UserService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping(path = "register")
-    ResponseEntity<Response<String>>  register(@RequestBody(required = true) User user) {
+    ResponseEntity<Response<String>>  register(@RequestBody(required = true) UserDTO user) {
         return userService.register(user);
     }
 

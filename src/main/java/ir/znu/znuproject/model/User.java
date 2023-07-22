@@ -1,4 +1,4 @@
-package ir.znu.znuproject.entity;
+package ir.znu.znuproject.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -27,13 +27,9 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("ID")
     private Long ID;
-    @JsonProperty("username")
     private String username;
-    @JsonProperty("password")
     private String password;
-    @JsonProperty("expireDate")
     private LocalDate expireDate;
 
     @JsonProperty("role")

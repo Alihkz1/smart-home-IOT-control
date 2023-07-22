@@ -1,7 +1,7 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.dto.UserDTO;
-import ir.znu.znuproject.entity.User;
+import ir.znu.znuproject.model.User;
 import ir.znu.znuproject.enums.Role;
 import ir.znu.znuproject.repository.UserRepository;
 import ir.znu.znuproject.shared.JWTService;
@@ -46,7 +46,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<Response<String>> register(User user) {
+    public ResponseEntity<Response<String>> register(UserDTO user) {
         Response<String> response = new Response();
         Optional<User> existUser = userRepository.findAll().stream().filter(el -> Objects.equals(el.getUsername(), user.getUsername())).findFirst();
         if (existUser.isPresent()) {

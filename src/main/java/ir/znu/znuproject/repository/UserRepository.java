@@ -1,6 +1,6 @@
 package ir.znu.znuproject.repository;
 
-import ir.znu.znuproject.entity.User;
+import ir.znu.znuproject.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

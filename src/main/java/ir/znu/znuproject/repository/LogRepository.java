@@ -1,6 +1,6 @@
 package ir.znu.znuproject.repository;
 
-import ir.znu.znuproject.entity.Log;
+import ir.znu.znuproject.model.Log;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.dto.LogDTO;
-import ir.znu.znuproject.entity.Log;
+import ir.znu.znuproject.model.Log;
 import ir.znu.znuproject.repository.LogRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
