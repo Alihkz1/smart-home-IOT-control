@@ -2,6 +2,7 @@ package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.entity.User;
+import ir.znu.znuproject.enums.Role;
 import ir.znu.znuproject.repository.UserRepository;
 import ir.znu.znuproject.shared.JWTService;
 import ir.znu.znuproject.shared.Response;
@@ -56,7 +57,8 @@ public class UserService {
             try {
                 User savingUser = new User();
                 savingUser.setUsername(user.getUsername());
-                savingUser.setPassword(user.getPassword());
+                savingUser.setRole(Role.USER);
+                savingUser.setPassword(passwordEncoder.encode(user.getPassword()));
                 savingUser.setExpireDate(LocalDate.of(LocalDate.now().getYear() + 1, LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth()));
                 userRepository.save(savingUser);
                 response.setSuccess(true);
@@ -71,8 +73,7 @@ public class UserService {
 
     public ResponseEntity<Response<String>> login(User user) {
         Response response = new Response();
-//        User userExists = userRepository.login(user.getUsername(), passwordEncoder.encode(user.getPassword()));
-        User userExists = userRepository.login(user.getUsername(), user.getPassword());
+        User userExists = userRepository.login(user.getUsername(), passwordEncoder.encode(user.getPassword()));
 
         if (userExists != null) {
             var token = jwtService.generateToken(user);
