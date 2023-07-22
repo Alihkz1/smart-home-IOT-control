@@ -6,10 +6,9 @@ import ir.znu.znuproject.service.UserService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -24,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping(path = "list")
-    ResponseEntity<Response<Map<String, UserDTO>>> getUserList() {
+    ResponseEntity<Response<Map<String, List<UserDTO>>>> getUserList() {
         return userService.findAll();
     }
 

@@ -11,18 +11,18 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Response<T> {
-    private int status;
+    private boolean success;
     private String message = "";
-    private Map<String, List<T>> data;
+    private Map<String, T> data;
 
-    public Response(Map<String, List<T>> data) {
+    public Response(Map<String, T> data) {
         this.data = data;
     }
 
     @Override
     public String toString() {
         return "Response{" +
-                "status=" + status +
+                "success=" + success +
                 ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';

@@ -25,17 +25,17 @@ public class LogService {
         this.logRepository = logRepository;
     }
 
-    public ResponseEntity<Response<Log>> getList() {
+    public ResponseEntity<Response<Map<String, List<LogDTO>>>> getList() {
         Response response = new Response();
-        Map map = new HashMap<String, List<UserDTO>>();
+        Map map = new HashMap<String, List<LogDTO>>();
         List<LogDTO> logs = logRepository.findAll().stream().map(this::convertEntityToDTO).collect(Collectors.toList());
         try {
             map.put("logs", logs);
             response.setData(map);
-            response.setStatus(200);
+            response.setSuccess(true);
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
-            response.setStatus(500);
+            response.setSuccess(false);
             response.setMessage("Error occurred!");
             return ResponseEntity.internalServerError().body(response);
         }
@@ -50,11 +50,11 @@ public class LogService {
 
         try {
             logRepository.save(savingLog);
-            response.setStatus(200);
+            response.setSuccess(true);
             response.setMessage("New record added!");
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
-            response.setStatus(500);
+            response.setSuccess(false);
             response.setMessage(e.toString());
             return ResponseEntity.internalServerError().body(response);
         }
