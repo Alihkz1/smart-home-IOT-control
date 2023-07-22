@@ -73,7 +73,9 @@ public class UserService {
 
     public ResponseEntity<Response<String>> login(User user) {
         Response response = new Response();
-        User userExists = userRepository.login(user.getUsername(), passwordEncoder.encode(user.getPassword()));
+
+        User userExists = userRepository.login(user.getUsername());
+        boolean passwordMatches = passwordEncoder.matches(user.getPassword(), userExists.getPassword());
 
         if (userExists != null) {
             var token = jwtService.generateToken(user);

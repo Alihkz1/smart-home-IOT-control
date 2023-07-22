@@ -37,5 +37,5 @@ public class ZnuProjectApplication implements CommandLineRunner {
 //        userRepository.saveAll(List.of(ali, omid));
 //        Log fistLog = new Log("light turned on by user", LocalDate.of(2023, 03, 20));
 //        logRepository.saveAll(List.of(fistLog));
-//    }
+    }
 }

@@ -20,9 +20,7 @@ public class Log {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long ID;
-    @JsonProperty("content")
     private String content;
-    @JsonProperty("date")
     private LocalDate date;
 
 

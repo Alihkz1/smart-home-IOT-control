@@ -32,10 +32,8 @@ public class UserController {
         return userService.register(user);
     }
 
-//    @PreAuthorize()
     @PostMapping(path = "login")
     ResponseEntity<Response<String>> login(@RequestBody(required = true) User model) {
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getCredentials();
         return userService.login(model);
     }
 }

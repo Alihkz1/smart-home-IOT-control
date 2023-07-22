@@ -1,9 +1,7 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.dto.LogDTO;
-import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.entity.Log;
-import ir.znu.znuproject.entity.User;
 import ir.znu.znuproject.repository.LogRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +39,10 @@ public class LogService {
         }
     }
 
-    public ResponseEntity<Response> saveNewLog(String content) {
+    public ResponseEntity<Response> save(String content) {
         Log savingLog = new Log();
         Response response = new Response();
-
+        
         savingLog.setContent(content);
         savingLog.setDate(LocalDate.now());
 
