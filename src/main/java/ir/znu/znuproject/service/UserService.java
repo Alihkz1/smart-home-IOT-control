@@ -74,8 +74,12 @@ public class UserService {
     public ResponseEntity<Response<String>> login(User user) {
         Response response = new Response();
         User userExists = userRepository.login(user.getUsername());
+        if (userExists == null){
+            response.setSuccess(false);
+            response.setMessage("Incorrect username or password!");
+            return ResponseEntity.badRequest().body(response);
+        }
         boolean passwordMatches = passwordEncoder.matches(user.getPassword(), userExists.getPassword());
-
         if (userExists != null && passwordMatches) {
             var token = jwtService.generateToken(user);
             Map map = new HashMap<String, String>();
@@ -94,8 +98,8 @@ public class UserService {
     private UserDTO convertEntityToDTO(User user) {
         UserDTO dto = new UserDTO();
         dto.setUsername(user.getUsername());
-        dto.setPassword(user.getPassword());
         dto.setExpireDate(user.getExpireDate());
+        dto.setPassword("");
         return dto;
     }
 
