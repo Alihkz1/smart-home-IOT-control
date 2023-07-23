@@ -73,11 +73,10 @@ public class UserService {
 
     public ResponseEntity<Response<String>> login(User user) {
         Response response = new Response();
-
         User userExists = userRepository.login(user.getUsername());
         boolean passwordMatches = passwordEncoder.matches(user.getPassword(), userExists.getPassword());
 
-        if (userExists != null) {
+        if (userExists != null && passwordMatches) {
             var token = jwtService.generateToken(user);
             Map map = new HashMap<String, String>();
             map.put("token", token);

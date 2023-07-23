@@ -17,12 +17,15 @@ public class ZnuProjectApplication implements CommandLineRunner {
         SpringApplication.run(ZnuProjectApplication.class, args);
     }
 
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
     private LogRepository logRepository;
-    @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    public ZnuProjectApplication(UserRepository userRepository, LogRepository logRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.logRepository = logRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public void run(String... args) throws Exception {
