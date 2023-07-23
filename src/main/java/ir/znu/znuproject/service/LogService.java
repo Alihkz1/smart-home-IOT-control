@@ -43,9 +43,7 @@ public class LogService {
     public ResponseEntity<Response> save(String content) {
         Log savingLog = new Log();
         Response response = new Response();
-        String timestamp = new Timestamp(System.currentTimeMillis()).toString();
         savingLog.setContent(content);
-        savingLog.setDate(timestamp);
 
         try {
             logRepository.save(savingLog);
