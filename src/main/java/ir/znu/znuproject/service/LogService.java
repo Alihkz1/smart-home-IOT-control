@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -42,9 +43,9 @@ public class LogService {
     public ResponseEntity<Response> save(String content) {
         Log savingLog = new Log();
         Response response = new Response();
-        
+        String timestamp = new Timestamp(System.currentTimeMillis()).toString();
         savingLog.setContent(content);
-        savingLog.setDate(LocalDate.now());
+        savingLog.setDate(timestamp);
 
         try {
             logRepository.save(savingLog);

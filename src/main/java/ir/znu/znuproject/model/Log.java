@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Entity
@@ -20,10 +21,10 @@ public class Log {
 
     private Long ID;
     private String content;
-    private LocalDate date;
+    private String date;
 
 
-    public Log(String content, LocalDate date) {
+    public Log(String content, String date) {
         this.content = content;
         this.date = date;
     }
