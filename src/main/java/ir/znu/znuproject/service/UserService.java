@@ -1,5 +1,6 @@
 package ir.znu.znuproject.service;
 
+import ir.znu.znuproject.dto.LogDTO;
 import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.model.User;
 import ir.znu.znuproject.enums.Role;
@@ -32,10 +33,12 @@ public class UserService {
 
     public ResponseEntity<Response<Map<String, List<UserDTO>>>> findAll() {
         Response response = new Response();
-        Map map = new HashMap<String, List<UserDTO>>();
-
+        Map map = new HashMap<String, List<LogDTO>>();
         try {
-            List<UserDTO> users = userRepository.findAll().stream().map(this::convertEntityToDTO).collect(Collectors.toList());
+            List<UserDTO> users = userRepository.findAll().stream().map(user -> new UserDTO(
+                    user.getUsername(),
+                    user.getExpireDate()
+            )).collect(Collectors.toList());
             map.put("users", users);
             response.setData(map);
             response.setSuccess(true);
@@ -46,7 +49,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<Response<String>> register(UserDTO user) {
+    public ResponseEntity<Response<String>> register(User user) {
         Response<String> response = new Response();
         Optional<User> existUser = userRepository.findAll().stream().filter(el -> Objects.equals(el.getUsername(), user.getUsername())).findFirst();
         if (existUser.isPresent()) {
@@ -95,12 +98,5 @@ public class UserService {
         }
     }
 
-    private UserDTO convertEntityToDTO(User user) {
-        UserDTO dto = new UserDTO();
-        dto.setUsername(user.getUsername());
-        dto.setExpireDate(user.getExpireDate());
-        dto.setPassword("");
-        return dto;
-    }
 
 }

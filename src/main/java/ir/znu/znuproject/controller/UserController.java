@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping(path = "register")
-    ResponseEntity<Response<String>>  register(@RequestBody(required = true) UserDTO user) {
+    ResponseEntity<Response<String>>  register(@RequestBody(required = true) User user) {
         return userService.register(user);
     }
 

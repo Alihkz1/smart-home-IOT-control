@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +25,10 @@ public class LogService {
     public ResponseEntity<Response<Map<String, List<LogDTO>>>> getList() {
         Response response = new Response();
         Map map = new HashMap<String, List<LogDTO>>();
-        List<LogDTO> logs = logRepository.findAll().stream().map(this::convertEntityToDTO).collect(Collectors.toList());
+        List<LogDTO> logs = logRepository.findAll().stream().map(log -> new LogDTO(
+                log.getContent(),
+                log.getDate()
+        )).collect(Collectors.toList());
         try {
             map.put("logs", logs);
             response.setData(map);
@@ -58,10 +59,4 @@ public class LogService {
 
     }
 
-    private LogDTO convertEntityToDTO(Log log) {
-        LogDTO dto = new LogDTO();
-        dto.setContent(log.getContent());
-        dto.setDate(log.getDate());
-        return dto;
-    }
 }

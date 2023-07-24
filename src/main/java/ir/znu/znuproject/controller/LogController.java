@@ -1,6 +1,7 @@
 package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.dto.LogDTO;
+import ir.znu.znuproject.model.Log;
 import ir.znu.znuproject.service.LogService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class LogController {
     }
 
     @PostMapping(path = "add")
-    ResponseEntity<Response> save(@RequestBody(required = true) LogDTO log) {
+    ResponseEntity<Response> save(@RequestBody(required = true) Log log) {
         return logService.save(log.getContent());
 
     }

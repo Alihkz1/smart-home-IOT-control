@@ -19,9 +19,11 @@ import java.util.Date;
 public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long ID;
+    @Column(nullable = false)
     private String content;
+
+    @Column(nullable = false)
     private Long date;
 
 
