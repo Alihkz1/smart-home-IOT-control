@@ -2,6 +2,7 @@ package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.dto.LogDTO;
 import ir.znu.znuproject.dto.UserDTO;
+import ir.znu.znuproject.dto.UserDtoMapper;
 import ir.znu.znuproject.model.User;
 import ir.znu.znuproject.enums.Role;
 import ir.znu.znuproject.repository.UserRepository;
@@ -21,24 +22,25 @@ public class UserService {
     private final UserRepository userRepository;
     private final JWTService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final UserDtoMapper userDtoMapper;
 
     @Autowired
     public UserService(UserRepository userRepository,
                        JWTService jwtService,
-                       PasswordEncoder passwordEncoder) {
+                       PasswordEncoder passwordEncoder,
+                       UserDtoMapper userDtoMapper) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;
+        this.userDtoMapper = userDtoMapper;
     }
 
     public ResponseEntity<Response<Map<String, List<UserDTO>>>> findAll() {
         Response response = new Response();
         Map map = new HashMap<String, List<LogDTO>>();
         try {
-            List<UserDTO> users = userRepository.findAll().stream().map(user -> new UserDTO(
-                    user.getUsername(),
-                    user.getExpireDate()
-            )).collect(Collectors.toList());
+            List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper
+            ).collect(Collectors.toList());
             map.put("users", users);
             response.setData(map);
             response.setSuccess(true);
@@ -77,7 +79,7 @@ public class UserService {
     public ResponseEntity<Response<String>> login(User user) {
         Response response = new Response();
         User userExists = userRepository.login(user.getUsername());
-        if (userExists == null){
+        if (userExists == null) {
             response.setSuccess(false);
             response.setMessage("Incorrect username or password!");
             return ResponseEntity.badRequest().body(response);
