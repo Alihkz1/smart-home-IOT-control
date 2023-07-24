@@ -62,7 +62,6 @@ public class UserService {
             try {
                 User savingUser = new User();
                 savingUser.setUsername(user.getUsername());
-                savingUser.setRole(Role.USER);
                 savingUser.setPassword(passwordEncoder.encode(user.getPassword()));
                 savingUser.setExpireDate(LocalDate.of(LocalDate.now().getYear() + 1, LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth()));
                 userRepository.save(savingUser);

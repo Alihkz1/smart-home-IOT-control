@@ -46,14 +46,11 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", expireDate=" + expireDate +
-                '}';
+    @PrePersist
+    private void init() {
+        this.role = Role.USER;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
