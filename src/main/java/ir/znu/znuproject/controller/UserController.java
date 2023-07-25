@@ -27,9 +27,9 @@ public class UserController {
         return userService.findAll();
     }
 
-    @PostMapping(path = "register")
-    ResponseEntity<Response<String>>  register(@RequestBody(required = true) User user) {
-        return userService.register(user);
+    @PostMapping(path = "signup")
+    ResponseEntity<Response<String>>  signup(@RequestBody(required = true) User user) {
+        return userService.signup(user);
     }
 
     @PostMapping(path = "login")

@@ -4,7 +4,6 @@ import ir.znu.znuproject.dto.LogDTO;
 import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.dto.UserDtoMapper;
 import ir.znu.znuproject.model.User;
-import ir.znu.znuproject.enums.Role;
 import ir.znu.znuproject.repository.UserRepository;
 import ir.znu.znuproject.shared.JWTService;
 import ir.znu.znuproject.shared.Response;
@@ -42,6 +41,7 @@ public class UserService {
             List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper
             ).collect(Collectors.toList());
             map.put("users", users);
+            map.put("length", users.size());
             response.setData(map);
             response.setSuccess(true);
             return ResponseEntity.ok().body(response);
@@ -51,7 +51,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<Response<String>> register(User user) {
+    public ResponseEntity<Response<String>> signup(User user) {
         Response<String> response = new Response();
         Optional<User> existUser = userRepository.findAll().stream().filter(el -> Objects.equals(el.getUsername(), user.getUsername())).findFirst();
         if (existUser.isPresent()) {
@@ -66,7 +66,7 @@ public class UserService {
                 savingUser.setExpireDate(LocalDate.of(LocalDate.now().getYear() + 1, LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth()));
                 userRepository.save(savingUser);
                 response.setSuccess(true);
-                response.setMessage("User successfully saved!");
+                response.setMessage("User successfully registered!");
                 return ResponseEntity.ok().body(response);
             } catch (Exception e) {
                 response.setMessage("Internal Server Error!");

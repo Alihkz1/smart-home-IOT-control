@@ -31,6 +31,7 @@ public class LogService {
         List<LogDTO> logs = logRepository.findAll().stream().map(logDtoMapper).collect(Collectors.toList());
         try {
             map.put("logs", logs);
+            map.put("length", logs.size());
             response.setData(map);
             response.setSuccess(true);
             return ResponseEntity.ok().body(response);
@@ -49,7 +50,7 @@ public class LogService {
         try {
             logRepository.save(savingLog);
             response.setSuccess(true);
-            response.setMessage("New record added!");
+            response.setMessage("New record saved!");
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
