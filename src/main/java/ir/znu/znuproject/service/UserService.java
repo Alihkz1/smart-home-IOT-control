@@ -1,5 +1,6 @@
 package ir.znu.znuproject.service;
 
+import ir.znu.znuproject.command.UserCommand;
 import ir.znu.znuproject.dto.LogDTO;
 import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.dto.UserDtoMapper;
@@ -34,7 +35,7 @@ public class UserService {
         this.userDtoMapper = userDtoMapper;
     }
 
-    public ResponseEntity<Response<Map<String, List<UserDTO>>>> findAll() {
+    public ResponseEntity<Response<Map<String, List<UserDTO>>>> getAllUsers() {
         Response response = new Response();
         Map map = new HashMap<String, List<LogDTO>>();
         try {
@@ -51,7 +52,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<Response<String>> signup(User user) {
+    public ResponseEntity<Response<String>> signup(UserCommand user) {
         Response<String> response = new Response();
         Optional<User> existUser = userRepository.findAll().stream().filter(el -> Objects.equals(el.getUsername(), user.getUsername())).findFirst();
         if (existUser.isPresent()) {
@@ -75,7 +76,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<Response<String>> login(User user) {
+    public ResponseEntity<Response<String>> login(UserCommand user) {
         Response response = new Response();
         User userExists = userRepository.login(user.getUsername());
         if (userExists == null) {
@@ -85,7 +86,7 @@ public class UserService {
         }
         boolean passwordMatches = passwordEncoder.matches(user.getPassword(), userExists.getPassword());
         if (userExists != null && passwordMatches) {
-            var token = jwtService.generateToken(user);
+            var token = jwtService.generateToken(userExists);
             Map map = new HashMap<String, String>();
             map.put("token", token);
             response.setSuccess(true);

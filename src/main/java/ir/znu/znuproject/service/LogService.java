@@ -1,5 +1,6 @@
 package ir.znu.znuproject.service;
 
+import ir.znu.znuproject.command.LogCommand;
 import ir.znu.znuproject.dto.LogDTO;
 import ir.znu.znuproject.dto.LogDtoMapper;
 import ir.znu.znuproject.model.Log;
@@ -25,7 +26,7 @@ public class LogService {
         this.logDtoMapper = logDtoMapper;
     }
 
-    public ResponseEntity<Response<Map<String, List<LogDTO>>>> getList() {
+    public ResponseEntity<Response<Map<String, List<LogDTO>>>> getAllLogs() {
         Response response = new Response();
         Map map = new HashMap<String, List<LogDTO>>();
         List<LogDTO> logs = logRepository.findAll().stream().map(logDtoMapper).collect(Collectors.toList());
@@ -42,10 +43,10 @@ public class LogService {
         }
     }
 
-    public ResponseEntity<Response> save(String content) {
+    public ResponseEntity<Response> save(LogCommand command) {
         Log savingLog = new Log();
         Response response = new Response();
-        savingLog.setContent(content);
+        savingLog.setContent(command.getContent());
 
         try {
             logRepository.save(savingLog);
