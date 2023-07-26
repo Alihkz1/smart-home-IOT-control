@@ -63,6 +63,7 @@ public class UserService {
             try {
                 User savingUser = new User();
                 savingUser.setUsername(user.getUsername());
+                savingUser.setName(user.getName());
                 savingUser.setPassword(passwordEncoder.encode(user.getPassword()));
                 savingUser.setExpireDate(LocalDate.of(LocalDate.now().getYear() + 1, LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth()));
                 userRepository.save(savingUser);
@@ -86,9 +87,12 @@ public class UserService {
         }
         boolean passwordMatches = passwordEncoder.matches(user.getPassword(), userExists.getPassword());
         if (userExists != null && passwordMatches) {
+            Optional<UserDTO> responseUser = userRepository.findAll().stream().filter(el -> Objects.equals(el.getUsername(), user.getUsername())).map(userDtoMapper).findFirst();
+
             var token = jwtService.generateToken(userExists);
             Map map = new HashMap<String, String>();
             map.put("token", token);
+            map.put("user",responseUser);
             response.setSuccess(true);
             response.setMessage("successful login!");
             response.setData(map);

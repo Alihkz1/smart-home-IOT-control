@@ -14,4 +14,6 @@ public class UserCommand {
     @NotNull
     @JsonProperty("password")
     private String password;
+    @JsonProperty("name")
+    private String name;
 }

@@ -20,6 +20,7 @@ public class ZnuProjectApplication implements CommandLineRunner {
     private UserRepository userRepository;
     private LogRepository logRepository;
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     public ZnuProjectApplication(UserRepository userRepository, LogRepository logRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
