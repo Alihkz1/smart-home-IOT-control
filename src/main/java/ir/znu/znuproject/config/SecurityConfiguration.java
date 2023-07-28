@@ -21,7 +21,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/users/login", "/api/v1/users/signup","/api/v1/users/list","/swagger-ui/")
+                .antMatchers("/api/v1/**", "/swagger-ui/")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
