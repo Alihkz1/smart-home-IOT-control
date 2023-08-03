@@ -1,9 +1,6 @@
 package ir.znu.znuproject.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -16,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,15 +33,5 @@ public class Log {
     @PrePersist
     public void init() {
         this.date = new Date().getTime();
-    }
-
-
-    @Override
-    public String toString() {
-        return "Log{" +
-                "ID=" + ID +
-                ", content='" + content + '\'' +
-                ", date=" + date +
-                '}';
     }
 }

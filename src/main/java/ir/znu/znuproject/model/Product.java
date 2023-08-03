@@ -1,9 +1,6 @@
 package ir.znu.znuproject.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,18 +29,7 @@ public class Product {
 
     private Long totalSold;
 
+    @Column(nullable = false)
     private Long amount;
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "ID=" + ID +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", off=" + off +
-                ", totalSold=" + totalSold +
-                ", amount=" + amount +
-                '}';
-    }
 }
