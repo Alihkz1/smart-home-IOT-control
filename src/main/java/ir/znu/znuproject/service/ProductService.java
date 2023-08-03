@@ -76,6 +76,7 @@ public class ProductService {
         if (product.isPresent()) {
             map.put("Product", product);
             response.setData(map);
+            response.setSuccess(true);
             return ResponseEntity.ok().body(response);
         } else {
             return ResponseEntity.notFound().build();
