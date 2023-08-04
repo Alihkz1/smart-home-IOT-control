@@ -39,4 +39,9 @@ public class ProductController {
     public ResponseEntity<Response> getById(@PathVariable Long id) {
         return productService.findById(id);
     }
+
+    @PutMapping(path = "edit", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> editProduct(@RequestBody(required = true) ProductCommand command) {
+        return productService.editProduct(command);
+    }
 }

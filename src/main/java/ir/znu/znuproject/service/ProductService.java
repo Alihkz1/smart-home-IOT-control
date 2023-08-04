@@ -10,7 +10,9 @@ import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +57,9 @@ public class ProductService {
     public ResponseEntity<Response> getAllProducts() {
         Response response = new Response();
         Map map = new HashMap<String, List<ProductDTO>>();
-        List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper).collect(Collectors.toList());
+        List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper).sorted(
+
+        ).collect(Collectors.toList());
         try {
             map.put("products", products);
             map.put("length", products.size());
@@ -83,5 +87,28 @@ public class ProductService {
         }
     }
 
-
+    @Transactional
+    public ResponseEntity<Response> editProduct(ProductCommand command) {
+        Response<String> response = new Response<String>();
+        Product product = productRepository.findById(command.getID()).orElseThrow(() -> new IllegalStateException("Not Found"));
+        if (product != null) {
+            product.setID(command.getID());
+            product.setName(command.getName());
+            product.setDescription(command.getDescription());
+            product.setPrice(command.getPrice());
+            product.setTotalSold(command.getTotalSold());
+            product.setOff(command.getOff());
+            product.setAmount(command.getAmount());
+            try {
+                productRepository.save(product);
+                response.setMessage("Product updated");
+                response.setSuccess(true);
+                return ResponseEntity.ok(response);
+            } catch (Exception e) {
+                response.setMessage(e.getMessage());
+                response.setSuccess(false);
+                return ResponseEntity.internalServerError().body(response);
+            }
+        } else return ResponseEntity.notFound().build();
+    }
 }
