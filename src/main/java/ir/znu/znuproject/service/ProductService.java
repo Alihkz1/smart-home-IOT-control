@@ -57,9 +57,7 @@ public class ProductService {
     public ResponseEntity<Response> getAllProducts() {
         Response response = new Response();
         Map map = new HashMap<String, List<ProductDTO>>();
-        List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper).sorted(
-
-        ).collect(Collectors.toList());
+        List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper).collect(Collectors.toList());
         try {
             map.put("products", products);
             map.put("length", products.size());
@@ -110,5 +108,19 @@ public class ProductService {
                 return ResponseEntity.internalServerError().body(response);
             }
         } else return ResponseEntity.notFound().build();
+    }
+
+    public ResponseEntity<Response> deleteById(Long id) {
+        Response response = new Response();
+        try {
+            productRepository.deleteById(id);
+            response.setSuccess(true);
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            response.setSuccess(false);
+            response.setMessage("Error!");
+            return ResponseEntity.internalServerError().body(response);
+
+        }
     }
 }

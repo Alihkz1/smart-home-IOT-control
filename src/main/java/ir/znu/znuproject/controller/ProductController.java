@@ -44,4 +44,11 @@ public class ProductController {
     public ResponseEntity<Response> editProduct(@RequestBody(required = true) ProductCommand command) {
         return productService.editProduct(command);
     }
+
+    @DeleteMapping(path = "delete/{id}")
+    public ResponseEntity<Response> deleteById(@PathVariable Long id) {
+        return productService.deleteById(id);
+    }
+
+
 }
