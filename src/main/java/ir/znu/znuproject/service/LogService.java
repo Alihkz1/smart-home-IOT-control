@@ -26,7 +26,7 @@ public class LogService {
         this.logDtoMapper = logDtoMapper;
     }
 
-    public ResponseEntity<Response<Map<String, List<LogDTO>>>> getAllLogs() {
+    public ResponseEntity<Response> getAllLogs() {
         Response response = new Response();
         Map map = new HashMap<String, List<LogDTO>>();
         List<LogDTO> logs = logRepository.findAll().stream().map(logDtoMapper).collect(Collectors.toList());
@@ -47,7 +47,6 @@ public class LogService {
         Log savingLog = new Log();
         Response response = new Response();
         savingLog.setContent(command.getContent());
-
         try {
             logRepository.save(savingLog);
             response.setSuccess(true);

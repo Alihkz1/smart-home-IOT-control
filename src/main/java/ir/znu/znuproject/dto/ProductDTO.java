@@ -1,7 +1,5 @@
 package ir.znu.znuproject.dto;
 
-import javax.persistence.Column;
-
 public record ProductDTO(
         Long ID,
         String name,

@@ -35,9 +35,9 @@ public class UserService {
         this.userDtoMapper = userDtoMapper;
     }
 
-    public ResponseEntity<Response<Map<String, List<UserDTO>>>> getAllUsers() {
+    public ResponseEntity<Response> getAllUsers() {
         Response response = new Response();
-        Map map = new HashMap<String, List<LogDTO>>();
+        Map map = new HashMap<String, List<UserDTO>>();
         try {
             List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper
             ).collect(Collectors.toList());
@@ -53,7 +53,7 @@ public class UserService {
     }
 
     public ResponseEntity<Response<String>> signup(UserCommand user) {
-        Response<String> response = new Response();
+        Response response = new Response();
         Optional<User> existUser = userRepository.findAll().stream().filter(el -> Objects.equals(el.getUsername(), user.getUsername())).findFirst();
         if (existUser.isPresent()) {
             response.setSuccess(false);
@@ -77,22 +77,21 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<Response<String>> login(UserCommand user) {
+    public ResponseEntity<Response> login(UserCommand user) {
         Response response = new Response();
-        User userExists = userRepository.login(user.getUsername());
-        if (userExists == null) {
+        User existUser = userRepository.login(user.getUsername());
+        if (existUser == null) {
             response.setSuccess(false);
             response.setMessage("Incorrect username or password!");
             return ResponseEntity.badRequest().body(response);
         }
-        boolean passwordMatches = passwordEncoder.matches(user.getPassword(), userExists.getPassword());
-        if (userExists != null && passwordMatches) {
+        boolean passwordMatches = passwordEncoder.matches(user.getPassword(), existUser.getPassword());
+        if (existUser != null && passwordMatches) {
             Optional<UserDTO> responseUser = userRepository.findAll().stream().filter(el -> Objects.equals(el.getUsername(), user.getUsername())).map(userDtoMapper).findFirst();
-
-            var token = jwtService.generateToken(userExists);
+            var token = jwtService.generateToken(existUser);
             Map map = new HashMap<String, String>();
             map.put("token", token);
-            map.put("user",responseUser);
+            map.put("user", responseUser);
             response.setSuccess(true);
             response.setMessage("successful login!");
             response.setData(map);

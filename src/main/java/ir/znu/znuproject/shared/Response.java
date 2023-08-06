@@ -7,15 +7,14 @@ import java.util.Map;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Response<T> {
     private boolean success;
     private String message = "";
-    private Map<String, T> data;
+    private T data;
 
-    public Response(Map<String, T> data) {
+    public Response(T data) {
         this.data = data;
     }
 

@@ -17,9 +17,9 @@ public class ZnuProjectApplication implements CommandLineRunner {
         SpringApplication.run(ZnuProjectApplication.class, args);
     }
 
-    private UserRepository userRepository;
-    private LogRepository logRepository;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final LogRepository logRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public ZnuProjectApplication(UserRepository userRepository, LogRepository logRepository, PasswordEncoder passwordEncoder) {

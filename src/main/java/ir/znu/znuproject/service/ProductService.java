@@ -10,8 +10,6 @@ import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +40,6 @@ public class ProductService {
             savingProduct.setAmount(command.getAmount());
             savingProduct.setTotalSold(command.getTotalSold());
             savingProduct.setDescription(command.getDescription());
-            System.out.println(savingProduct.toString());
             productRepository.save(savingProduct);
             response.setSuccess(true);
             response.setMessage("New record saved!");
@@ -80,14 +77,12 @@ public class ProductService {
             response.setData(map);
             response.setSuccess(true);
             return ResponseEntity.ok().body(response);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        } else return ResponseEntity.notFound().build();
     }
 
     @Transactional
     public ResponseEntity<Response> editProduct(ProductCommand command) {
-        Response<String> response = new Response<String>();
+        Response response = new Response();
         Product product = productRepository.findById(command.getID()).orElseThrow(() -> new IllegalStateException("Not Found"));
         if (product != null) {
             product.setID(command.getID());
@@ -118,7 +113,7 @@ public class ProductService {
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
-            response.setMessage("Error!");
+            response.setMessage("Error occurred!");
             return ResponseEntity.internalServerError().body(response);
 
         }

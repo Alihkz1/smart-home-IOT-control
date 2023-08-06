@@ -20,15 +20,8 @@ public class Log {
     private Long ID;
     @Column(nullable = false)
     private String content;
-
     @Column(nullable = false)
     private Long date;
-
-
-    public Log(String content, Long date) {
-        this.content = content;
-        this.date = date;
-    }
 
     @PrePersist
     public void init() {

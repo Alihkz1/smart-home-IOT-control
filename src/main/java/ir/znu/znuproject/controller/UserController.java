@@ -25,17 +25,17 @@ public class UserController {
     }
 
     @GetMapping(path = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Response<Map<String, List<UserDTO>>>> getUserList() {
+    public ResponseEntity<Response> getUserList() {
         return userService.getAllUsers();
     }
 
     @PostMapping(path = "signup", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Response<String>> signup(@RequestBody(required = true) UserCommand command) {
+    public ResponseEntity<Response<String>> signup(@RequestBody(required = true) UserCommand command) {
         return userService.signup(command);
     }
 
     @PostMapping(path = "login", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Response<String>> login(@RequestBody(required = true) UserCommand command) {
+    public ResponseEntity<Response> login(@RequestBody(required = true) UserCommand command) {
         return userService.login(command);
     }
 }

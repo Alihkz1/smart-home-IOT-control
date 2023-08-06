@@ -38,14 +38,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User(String username, String password, LocalDate expireDate, Role role, String name) {
-        this.username = username;
-        this.password = password;
-        this.expireDate = expireDate;
-        this.role = role;
-        this.name = name;
-    }
-
     @PrePersist
     private void init() {
         this.role = Role.USER;

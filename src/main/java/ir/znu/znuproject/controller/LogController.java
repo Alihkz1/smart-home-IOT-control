@@ -25,12 +25,12 @@ public class LogController {
     }
 
     @GetMapping(path = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Response<Map<String, List<LogDTO>>>> getLogList() {
+    public ResponseEntity<Response> getLogList() {
         return logService.getAllLogs();
     }
 
     @PostMapping(path = "add", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Response> save(@RequestBody(required = true) LogCommand command) {
+    public ResponseEntity<Response> save(@RequestBody(required = true) LogCommand command) {
         return logService.save(command);
 
     }
