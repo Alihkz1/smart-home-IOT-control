@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductCommand {
+public class ProductAddEditCommand {
     @JsonProperty("ID")
     private Long ID;
     @JsonProperty("name")

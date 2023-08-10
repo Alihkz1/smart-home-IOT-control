@@ -1,6 +1,6 @@
 package ir.znu.znuproject.service;
 
-import ir.znu.znuproject.command.LogCommand;
+import ir.znu.znuproject.command.LogAddCommand;
 import ir.znu.znuproject.dto.LogDTO;
 import ir.znu.znuproject.dto.LogDtoMapper;
 import ir.znu.znuproject.model.Log;
@@ -43,7 +43,7 @@ public class LogService {
         }
     }
 
-    public ResponseEntity<Response> save(LogCommand command) {
+    public ResponseEntity<Response> save(LogAddCommand command) {
         Log savingLog = new Log();
         Response response = new Response();
         savingLog.setContent(command.getContent());

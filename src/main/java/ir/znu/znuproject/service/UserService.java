@@ -1,7 +1,7 @@
 package ir.znu.znuproject.service;
 
-import ir.znu.znuproject.command.UserCommand;
-import ir.znu.znuproject.dto.LogDTO;
+import ir.znu.znuproject.command.LoginCommand;
+import ir.znu.znuproject.command.SignUpCommand;
 import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.dto.UserDtoMapper;
 import ir.znu.znuproject.model.User;
@@ -52,8 +52,10 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<Response<String>> signup(UserCommand user) {
+    public ResponseEntity<Response<String>> signup(SignUpCommand user) {
         Response response = new Response();
+        if (user.getName() == null)
+            throw new IllegalArgumentException("name is required.");
         Optional<User> existUser = userRepository.findAll().stream().filter(el -> Objects.equals(el.getUsername(), user.getUsername())).findFirst();
         if (existUser.isPresent()) {
             response.setSuccess(false);
@@ -77,7 +79,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<Response> login(UserCommand user) {
+    public ResponseEntity<Response> login(LoginCommand user) {
         Response response = new Response();
         User existUser = userRepository.login(user.getUsername());
         if (existUser == null) {

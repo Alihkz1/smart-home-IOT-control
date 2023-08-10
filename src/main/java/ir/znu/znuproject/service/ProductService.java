@@ -1,6 +1,6 @@
 package ir.znu.znuproject.service;
 
-import ir.znu.znuproject.command.ProductCommand;
+import ir.znu.znuproject.command.ProductAddEditCommand;
 
 import ir.znu.znuproject.dto.ProductDTO;
 import ir.znu.znuproject.dto.ProductDtoMapper;
@@ -30,7 +30,7 @@ public class ProductService {
         this.productDtoMapper = productDtoMapper;
     }
 
-    public ResponseEntity<Response> save(ProductCommand command) {
+    public ResponseEntity<Response> save(ProductAddEditCommand command) {
         Product savingProduct = new Product();
         Response response = new Response<>();
         try {
@@ -81,7 +81,7 @@ public class ProductService {
     }
 
     @Transactional
-    public ResponseEntity<Response> editProduct(ProductCommand command) {
+    public ResponseEntity<Response> editProduct(ProductAddEditCommand command) {
         Response response = new Response();
         Product product = productRepository.findById(command.getID()).orElseThrow(() -> new IllegalStateException("Not Found"));
         if (product != null) {

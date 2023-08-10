@@ -1,6 +1,6 @@
 package ir.znu.znuproject.controller;
 
-import ir.znu.znuproject.command.ProductCommand;
+import ir.znu.znuproject.command.ProductAddEditCommand;
 import ir.znu.znuproject.service.ProductService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +30,13 @@ public class ProductController {
     }
 
     @PostMapping(path = "add", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> save(@RequestBody(required = true) ProductCommand command) {
+    public ResponseEntity<Response> save(@RequestBody(required = true) ProductAddEditCommand command) {
         return productService.save(command);
     }
 
 
     @PutMapping(path = "edit", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> editProduct(@RequestBody(required = true) ProductCommand command) {
+    public ResponseEntity<Response> editProduct(@RequestBody(required = true) ProductAddEditCommand command) {
         return productService.editProduct(command);
     }
 

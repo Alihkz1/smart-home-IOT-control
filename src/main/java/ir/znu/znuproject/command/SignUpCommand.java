@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserCommand {
+public class SignUpCommand {
     @NotNull
     @JsonProperty("username")
     private String username;

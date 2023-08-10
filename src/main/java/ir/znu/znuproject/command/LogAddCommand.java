@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LogCommand {
+public class LogAddCommand {
     @NotNull
     @JsonProperty("content")
     private String content;
