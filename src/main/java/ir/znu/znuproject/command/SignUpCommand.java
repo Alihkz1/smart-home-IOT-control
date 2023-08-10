@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class SignUpCommand {
-
     @NotNull
     @JsonProperty("username")
     private String username;

@@ -1,4 +1,4 @@
-package ir.znu.znuproject.config.controller;
+package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.command.LoginCommand;
 import ir.znu.znuproject.command.SignUpCommand;
@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping(path = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> getUserList() {
+    public ResponseEntity<Response> list() {
         return userService.getAllUsers();
     }
 

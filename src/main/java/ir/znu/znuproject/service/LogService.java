@@ -1,9 +1,8 @@
 package ir.znu.znuproject.service;
 
-import ir.znu.znuproject.command.LogAddCommand;
+import ir.znu.znuproject.command.LogCreateCommand;
 import ir.znu.znuproject.dto.LogDTO;
 import ir.znu.znuproject.dto.LogDtoMapper;
-import ir.znu.znuproject.model.Log;
 import ir.znu.znuproject.repository.LogRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,7 @@ public class LogService {
         }
     }
 
-    public ResponseEntity<Response> save(LogAddCommand command) {
+    public ResponseEntity<Response> save(LogCreateCommand command) {
         Response response = new Response();
         try {
             logRepository.save(command.toEntity());

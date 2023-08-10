@@ -1,6 +1,6 @@
-package ir.znu.znuproject.config.controller;
+package ir.znu.znuproject.controller;
 
-import ir.znu.znuproject.command.LogAddCommand;
+import ir.znu.znuproject.command.LogCreateCommand;
 import ir.znu.znuproject.service.LogService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,12 @@ public class LogController {
     }
 
     @GetMapping(path = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> getLogList() {
+    public ResponseEntity<Response> list() {
         return logService.getAllLogs();
     }
 
-    @PostMapping(path = "add", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> save(@RequestBody(required = true) LogAddCommand command) {
+    @PostMapping(path = "create", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> create(@RequestBody(required = true) LogCreateCommand command) {
         return logService.save(command);
 
     }

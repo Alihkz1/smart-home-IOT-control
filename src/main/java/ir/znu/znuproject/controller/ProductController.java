@@ -1,6 +1,7 @@
-package ir.znu.znuproject.config.controller;
+package ir.znu.znuproject.controller;
 
-import ir.znu.znuproject.command.ProductAddEditCommand;
+import ir.znu.znuproject.command.ProductCreateCommand;
+import ir.znu.znuproject.command.ProductEditCommand;
 import ir.znu.znuproject.service.ProductService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class ProductController {
     }
 
     @GetMapping(path = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> getProductList() {
+    public ResponseEntity<Response> list() {
         return productService.getAllProducts();
     }
 
@@ -29,14 +30,13 @@ public class ProductController {
         return productService.findById(id);
     }
 
-    @PostMapping(path = "add", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> save(@RequestBody(required = true) ProductAddEditCommand command) {
-        return productService.save(command);
+    @PostMapping(path = "create", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> create(@RequestBody(required = true) ProductCreateCommand command) {
+        return productService.create(command);
     }
 
-
     @PutMapping(path = "edit", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> editProduct(@RequestBody(required = true) ProductAddEditCommand command) {
+    public ResponseEntity<Response> edit(@RequestBody(required = true) ProductEditCommand command) {
         return productService.editProduct(command);
     }
 

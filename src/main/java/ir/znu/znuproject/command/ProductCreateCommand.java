@@ -2,14 +2,8 @@ package ir.znu.znuproject.command;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.znu.znuproject.model.Product;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-public class ProductAddEditCommand {
-    @JsonProperty("ID")
-    private Long ID;
+public class ProductCreateCommand {
     @JsonProperty("name")
     private String name;
     @JsonProperty("description")
@@ -25,7 +19,6 @@ public class ProductAddEditCommand {
 
     public Product toEntity() {
         return Product.builder()
-                .ID(ID)
                 .name(name)
                 .description(description)
                 .price(price)
@@ -34,5 +27,4 @@ public class ProductAddEditCommand {
                 .amount(amount)
                 .build();
     }
-
 }
