@@ -14,6 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
+@Builder
 public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

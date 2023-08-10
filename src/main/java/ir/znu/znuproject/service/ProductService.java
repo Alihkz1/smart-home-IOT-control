@@ -10,6 +10,7 @@ import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.List;
@@ -31,16 +32,9 @@ public class ProductService {
     }
 
     public ResponseEntity<Response> save(ProductAddEditCommand command) {
-        Product savingProduct = new Product();
         Response response = new Response<>();
         try {
-            savingProduct.setOff(command.getOff());
-            savingProduct.setName(command.getName());
-            savingProduct.setPrice(command.getPrice());
-            savingProduct.setAmount(command.getAmount());
-            savingProduct.setTotalSold(command.getTotalSold());
-            savingProduct.setDescription(command.getDescription());
-            productRepository.save(savingProduct);
+            productRepository.save(command.toEntity());
             response.setSuccess(true);
             response.setMessage("New record saved!");
             return ResponseEntity.ok().body(response);
@@ -83,26 +77,18 @@ public class ProductService {
     @Transactional
     public ResponseEntity<Response> editProduct(ProductAddEditCommand command) {
         Response response = new Response();
-        Product product = productRepository.findById(command.getID()).orElseThrow(() -> new IllegalStateException("Not Found"));
-        if (product != null) {
-            product.setID(command.getID());
-            product.setName(command.getName());
-            product.setDescription(command.getDescription());
-            product.setPrice(command.getPrice());
-            product.setTotalSold(command.getTotalSold());
-            product.setOff(command.getOff());
-            product.setAmount(command.getAmount());
-            try {
-                productRepository.save(product);
-                response.setMessage("Product updated");
-                response.setSuccess(true);
-                return ResponseEntity.ok(response);
-            } catch (Exception e) {
-                response.setMessage(e.getMessage());
-                response.setSuccess(false);
-                return ResponseEntity.internalServerError().body(response);
-            }
-        } else return ResponseEntity.notFound().build();
+        Product product = productRepository.findById(command.getID()).orElseThrow(() -> new IllegalArgumentException("Not Found"));
+        try {
+            productRepository.save(command.toEntity());
+            response.setMessage("Product updated");
+            response.setSuccess(true);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.setMessage(e.getMessage());
+            response.setSuccess(false);
+            return ResponseEntity.internalServerError().body(response);
+        }
+
     }
 
     public ResponseEntity<Response> deleteById(Long id) {

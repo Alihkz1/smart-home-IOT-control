@@ -1,4 +1,4 @@
-package ir.znu.znuproject.controller;
+package ir.znu.znuproject.config.controller;
 
 import ir.znu.znuproject.command.ProductAddEditCommand;
 import ir.znu.znuproject.service.ProductService;

@@ -44,11 +44,9 @@ public class LogService {
     }
 
     public ResponseEntity<Response> save(LogAddCommand command) {
-        Log savingLog = new Log();
         Response response = new Response();
-        savingLog.setContent(command.getContent());
         try {
-            logRepository.save(savingLog);
+            logRepository.save(command.toEntity());
             response.setSuccess(true);
             response.setMessage("New record saved!");
             return ResponseEntity.ok().body(response);

@@ -42,7 +42,7 @@ public class UserService {
             List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper
             ).collect(Collectors.toList());
             map.put("users", users);
-            map.put("length", users.size());
+            map.put("length", users.size()); /*todo : create userListDto that includes rowCount and list*/
             response.setData(map);
             response.setSuccess(true);
             return ResponseEntity.ok().body(response);
@@ -63,12 +63,7 @@ public class UserService {
             return ResponseEntity.badRequest().body(response);
         } else {
             try {
-                User savingUser = new User();
-                savingUser.setUsername(user.getUsername());
-                savingUser.setName(user.getName());
-                savingUser.setPassword(passwordEncoder.encode(user.getPassword()));
-                savingUser.setExpireDate(LocalDate.of(LocalDate.now().getYear() + 1, LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth()));
-                userRepository.save(savingUser);
+                userRepository.save(user.toEntity(passwordEncoder.encode(user.getPassword())));
                 response.setSuccess(true);
                 response.setMessage("User successfully registered!");
                 return ResponseEntity.ok().body(response);
