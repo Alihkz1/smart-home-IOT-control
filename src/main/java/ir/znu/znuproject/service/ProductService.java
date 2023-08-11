@@ -5,6 +5,7 @@ import ir.znu.znuproject.command.ProductEditCommand;
 
 import ir.znu.znuproject.dto.ProductDTO;
 import ir.znu.znuproject.dto.ProductDtoMapper;
+import ir.znu.znuproject.dto.ProductListDto;
 import ir.znu.znuproject.model.Product;
 import ir.znu.znuproject.repository.ProductRepository;
 import ir.znu.znuproject.shared.Response;
@@ -37,7 +38,7 @@ public class ProductService {
         try {
             productRepository.save(command.toEntity());
             response.setSuccess(true);
-            response.setMessage("New record saved!");
+            response.setMessage("new record saved!");
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
@@ -46,19 +47,20 @@ public class ProductService {
         }
     }
 
-    public ResponseEntity<Response> getAllProducts() {
+    public ResponseEntity<Response<ProductListDto>> getList() {
         Response response = new Response();
-        Map map = new HashMap<String, List<ProductDTO>>();
         List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper).collect(Collectors.toList());
         try {
-            map.put("products", products);
-            map.put("length", products.size());
-            response.setData(map);
+            ProductListDto productListDto = ProductListDto.builder()
+                    .products(products)
+                    .rowCount(products.size())
+                    .build();
+            response.setData(productListDto);
             response.setSuccess(true);
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
-            response.setMessage("Error occurred!");
+            response.setMessage("error occurred!");
             return ResponseEntity.internalServerError().body(response);
         }
     }
@@ -81,7 +83,7 @@ public class ProductService {
         Product product = productRepository.findById(command.getID()).orElseThrow(() -> new IllegalArgumentException("Not Found"));
         try {
             productRepository.save(command.toEntity());
-            response.setMessage("Product updated");
+            response.setMessage("product updated");
             response.setSuccess(true);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -100,7 +102,7 @@ public class ProductService {
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
-            response.setMessage("Error occurred!");
+            response.setMessage("error occurred!");
             return ResponseEntity.internalServerError().body(response);
 
         }

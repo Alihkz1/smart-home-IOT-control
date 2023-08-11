@@ -3,6 +3,7 @@ package ir.znu.znuproject.service;
 import ir.znu.znuproject.command.LogCreateCommand;
 import ir.znu.znuproject.dto.LogDTO;
 import ir.znu.znuproject.dto.LogDtoMapper;
+import ir.znu.znuproject.dto.LogListDto;
 import ir.znu.znuproject.repository.LogRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,15 @@ public class LogService {
         this.logDtoMapper = logDtoMapper;
     }
 
-    public ResponseEntity<Response> getAllLogs() {
+    public ResponseEntity<Response<LogListDto>> getAllLogs() {
         Response response = new Response();
-        Map map = new HashMap<String, List<LogDTO>>();
         List<LogDTO> logs = logRepository.findAll().stream().map(logDtoMapper).collect(Collectors.toList());
         try {
-            map.put("logs", logs);
-            map.put("length", logs.size());
-            response.setData(map);
+            LogListDto logListDto = LogListDto.builder()
+                    .logs(logs)
+                    .rowCount(logs.size())
+                    .build();
+            response.setData(logListDto);
             response.setSuccess(true);
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {

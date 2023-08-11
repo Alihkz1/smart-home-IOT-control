@@ -4,6 +4,7 @@ import ir.znu.znuproject.command.LoginCommand;
 import ir.znu.znuproject.command.SignUpCommand;
 import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.dto.UserDtoMapper;
+import ir.znu.znuproject.dto.UserListDto;
 import ir.znu.znuproject.model.User;
 import ir.znu.znuproject.repository.UserRepository;
 import ir.znu.znuproject.shared.JWTService;
@@ -35,15 +36,16 @@ public class UserService {
         this.userDtoMapper = userDtoMapper;
     }
 
-    public ResponseEntity<Response> getAllUsers() {
+    public ResponseEntity<Response<UserListDto>> getAllUsers() {
         Response response = new Response();
-        Map map = new HashMap<String, List<UserDTO>>();
         try {
             List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper
             ).collect(Collectors.toList());
-            map.put("users", users);
-            map.put("length", users.size()); /*todo : create userListDto that includes rowCount and list*/
-            response.setData(map);
+            UserListDto userListDto = UserListDto.builder()
+                    .users(users)
+                    .rowCount(users.size())
+                    .build();
+            response.setData(userListDto);
             response.setSuccess(true);
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
@@ -52,7 +54,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<Response<String>> signup(SignUpCommand user) {
+    public ResponseEntity<Response> signup(SignUpCommand user) {
         Response response = new Response();
         if (user.getName() == null)
             throw new IllegalArgumentException("name is required.");
@@ -79,7 +81,7 @@ public class UserService {
         User existUser = userRepository.login(user.getUsername());
         if (existUser == null) {
             response.setSuccess(false);
-            response.setMessage("Incorrect username or password!");
+            response.setMessage("incorrect username or password!");
             return ResponseEntity.badRequest().body(response);
         }
         boolean passwordMatches = passwordEncoder.matches(user.getPassword(), existUser.getPassword());
@@ -95,7 +97,7 @@ public class UserService {
             return ResponseEntity.ok().body(response);
         } else {
             response.setSuccess(false);
-            response.setMessage("Incorrect username or password!");
+            response.setMessage("incorrect username or password!");
             return ResponseEntity.badRequest().body(response);
         }
     }

@@ -2,6 +2,7 @@ package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.command.ProductCreateCommand;
 import ir.znu.znuproject.command.ProductEditCommand;
+import ir.znu.znuproject.dto.ProductListDto;
 import ir.znu.znuproject.service.ProductService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class ProductController {
     }
 
     @GetMapping(path = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> list() {
-        return productService.getAllProducts();
+    public ResponseEntity<Response<ProductListDto>> list() {
+        return productService.getList();
     }
 
     @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
