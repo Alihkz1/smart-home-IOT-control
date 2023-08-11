@@ -4,9 +4,9 @@ import lombok.*;
 
 import java.util.List;
 
-@Builder
 @Getter
 @Setter
+@Builder
 public class UserListDto {
     private List<UserDTO> users;
     private Integer rowCount;

@@ -9,21 +9,13 @@ import java.util.Map;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Response<T> {
-    private boolean success;
+    private boolean success = true;
     private String message = "";
     private T data;
 
     public Response(T data) {
         this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        return "Response{" +
-                "success=" + success +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                '}';
     }
 }

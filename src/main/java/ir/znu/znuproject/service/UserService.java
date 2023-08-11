@@ -2,6 +2,7 @@ package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.command.LoginCommand;
 import ir.znu.znuproject.command.SignUpCommand;
+import ir.znu.znuproject.dto.LoginDto;
 import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.dto.UserDtoMapper;
 import ir.znu.znuproject.dto.UserListDto;
@@ -27,9 +28,9 @@ public class UserService {
 
     @Autowired
     public UserService(UserRepository userRepository,
-                       JWTService jwtService,
-                       PasswordEncoder passwordEncoder,
-                       UserDtoMapper userDtoMapper) {
+            JWTService jwtService,
+            PasswordEncoder passwordEncoder,
+            UserDtoMapper userDtoMapper) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;
@@ -39,14 +40,12 @@ public class UserService {
     public ResponseEntity<Response<UserListDto>> getAllUsers() {
         Response response = new Response();
         try {
-            List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper
-            ).collect(Collectors.toList());
+            List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper).collect(Collectors.toList());
             UserListDto userListDto = UserListDto.builder()
                     .users(users)
                     .rowCount(users.size())
                     .build();
             response.setData(userListDto);
-            response.setSuccess(true);
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
@@ -58,7 +57,8 @@ public class UserService {
         Response response = new Response();
         if (user.getName() == null)
             throw new IllegalArgumentException("name is required.");
-        Optional<User> existUser = userRepository.findAll().stream().filter(el -> Objects.equals(el.getUsername(), user.getUsername())).findFirst();
+        Optional<User> existUser = userRepository.findAll().stream()
+                .filter(el -> el.getUsername().equals(user.getUsername())).findFirst();
         if (existUser.isPresent()) {
             response.setSuccess(false);
             response.setMessage("Email Already Taken");
@@ -66,7 +66,6 @@ public class UserService {
         } else {
             try {
                 userRepository.save(user.toEntity(passwordEncoder.encode(user.getPassword())));
-                response.setSuccess(true);
                 response.setMessage("User successfully registered!");
                 return ResponseEntity.ok().body(response);
             } catch (Exception e) {
@@ -86,14 +85,16 @@ public class UserService {
         }
         boolean passwordMatches = passwordEncoder.matches(user.getPassword(), existUser.getPassword());
         if (existUser != null && passwordMatches) {
-            Optional<UserDTO> responseUser = userRepository.findAll().stream().filter(el -> Objects.equals(el.getUsername(), user.getUsername())).map(userDtoMapper).findFirst();
+            Optional<UserDTO> responseUser = userRepository.findAll().stream()
+                    .filter(el -> el.getUsername().equals(user.getUsername()))
+                    .map(userDtoMapper).findFirst();
             var token = jwtService.generateToken(existUser);
-            Map map = new HashMap<String, String>();
-            map.put("token", token);
-            map.put("user", responseUser);
-            response.setSuccess(true);
+            LoginDto loginDto = LoginDto.builder()
+                    .token(token)
+                    .user(responseUser)
+                    .build();
             response.setMessage("successful login!");
-            response.setData(map);
+            response.setData(loginDto);
             return ResponseEntity.ok().body(response);
         } else {
             response.setSuccess(false);
@@ -101,6 +102,5 @@ public class UserService {
             return ResponseEntity.badRequest().body(response);
         }
     }
-
 
 }

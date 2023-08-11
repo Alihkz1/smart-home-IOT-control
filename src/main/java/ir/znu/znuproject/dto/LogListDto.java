@@ -6,10 +6,11 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Builder
+
 
 @Getter
 @Setter
+@Builder
 public class LogListDto {
     private List<LogDTO> logs;
     private Integer rowCount;

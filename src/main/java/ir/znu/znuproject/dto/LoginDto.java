@@ -4,13 +4,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
 @Builder
-public class ProductListDto {
-    private List<ProductDTO> products;
-    private Integer rowCount;
+public class LoginDto {
+    private String token;
+    private Optional<UserDTO> user;
 
 }

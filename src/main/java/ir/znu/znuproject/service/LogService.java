@@ -35,7 +35,6 @@ public class LogService {
                     .rowCount(logs.size())
                     .build();
             response.setData(logListDto);
-            response.setSuccess(true);
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
@@ -48,7 +47,6 @@ public class LogService {
         Response response = new Response();
         try {
             logRepository.save(command.toEntity());
-            response.setSuccess(true);
             response.setMessage("New record saved!");
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {

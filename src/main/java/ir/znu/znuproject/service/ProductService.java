@@ -27,8 +27,7 @@ public class ProductService {
     private final ProductDtoMapper productDtoMapper;
 
     @Autowired
-    public ProductService(ProductRepository productRepository, ProductDtoMapper productDtoMapper
-    ) {
+    public ProductService(ProductRepository productRepository, ProductDtoMapper productDtoMapper) {
         this.productRepository = productRepository;
         this.productDtoMapper = productDtoMapper;
     }
@@ -37,7 +36,6 @@ public class ProductService {
         Response response = new Response<>();
         try {
             productRepository.save(command.toEntity());
-            response.setSuccess(true);
             response.setMessage("new record saved!");
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
@@ -49,14 +47,14 @@ public class ProductService {
 
     public ResponseEntity<Response<ProductListDto>> getList() {
         Response response = new Response();
-        List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper).collect(Collectors.toList());
+        List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper)
+                .collect(Collectors.toList());
         try {
             ProductListDto productListDto = ProductListDto.builder()
                     .products(products)
                     .rowCount(products.size())
                     .build();
             response.setData(productListDto);
-            response.setSuccess(true);
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
@@ -72,19 +70,19 @@ public class ProductService {
         if (product.isPresent()) {
             map.put("Product", product);
             response.setData(map);
-            response.setSuccess(true);
             return ResponseEntity.ok().body(response);
-        } else return ResponseEntity.notFound().build();
+        } else
+            return ResponseEntity.notFound().build();
     }
 
     @Transactional
     public ResponseEntity<Response> editProduct(ProductEditCommand command) {
         Response response = new Response();
-        Product product = productRepository.findById(command.getID()).orElseThrow(() -> new IllegalArgumentException("Not Found"));
+        Product product = productRepository.findById(command.getID())
+                .orElseThrow(() -> new IllegalArgumentException("Not Found"));
         try {
             productRepository.save(command.toEntity());
             response.setMessage("product updated");
-            response.setSuccess(true);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.setMessage(e.getMessage());
@@ -98,7 +96,6 @@ public class ProductService {
         Response response = new Response();
         try {
             productRepository.deleteById(id);
-            response.setSuccess(true);
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
