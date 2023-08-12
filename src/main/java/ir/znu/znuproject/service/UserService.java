@@ -1,5 +1,6 @@
 package ir.znu.znuproject.service;
 
+import ir.znu.znuproject.command.ChangePasswordCommand;
 import ir.znu.znuproject.command.LoginCommand;
 import ir.znu.znuproject.command.SignUpCommand;
 import ir.znu.znuproject.dto.LoginDto;
@@ -28,9 +29,9 @@ public class UserService {
 
     @Autowired
     public UserService(UserRepository userRepository,
-            JWTService jwtService,
-            PasswordEncoder passwordEncoder,
-            UserDtoMapper userDtoMapper) {
+                       JWTService jwtService,
+                       PasswordEncoder passwordEncoder,
+                       UserDtoMapper userDtoMapper) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;
@@ -101,6 +102,13 @@ public class UserService {
             response.setMessage("incorrect username or password!");
             return ResponseEntity.badRequest().body(response);
         }
+    }
+
+    public ResponseEntity<Response> changePassword(ChangePasswordCommand command) {
+        Response response = new Response();
+        userRepository.changePassword(command.getID(), passwordEncoder.encode(command.getPassword()));
+        response.setMessage("password changed.");
+        return ResponseEntity.ok(response);
     }
 
 }
