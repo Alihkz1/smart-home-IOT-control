@@ -1,5 +1,6 @@
 package ir.znu.znuproject.controller;
 
+import ir.znu.znuproject.command.ChangePasswordCommand;
 import ir.znu.znuproject.command.LoginCommand;
 import ir.znu.znuproject.command.SignUpCommand;
 import ir.znu.znuproject.dto.UserListDto;
@@ -34,5 +35,10 @@ public class UserController {
     @PostMapping(path = "login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Response> login(@RequestBody(required = true) LoginCommand command) {
         return userService.login(command);
+    }
+
+    @PutMapping(path = "changepassword", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> changePassword(@RequestBody(required = true) ChangePasswordCommand command) {
+        return userService.changePassword(command);
     }
 }
