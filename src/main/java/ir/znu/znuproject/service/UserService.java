@@ -5,6 +5,7 @@ import ir.znu.znuproject.command.SignUpCommand;
 import ir.znu.znuproject.dto.LoginDto;
 import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.dto.UserDtoMapper;
+import ir.znu.znuproject.dto.UserListDto;
 import ir.znu.znuproject.model.User;
 import ir.znu.znuproject.repository.UserRepository;
 import ir.znu.znuproject.shared.JWTService;
@@ -42,18 +43,11 @@ public class UserService {
         try {
             List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper
             ).collect(Collectors.toList());
-<<<<<<< Updated upstream
-            map.put("users", users);
-            map.put("length", users.size()); /*todo : create userListDto that includes rowCount and list*/
-            response.setData(map);
-            response.setSuccess(true);
-=======
             UserListDto userListDto = UserListDto.builder()
                     .users(users)
                     .rowCount(users.size())
                     .build();
             response.setData(userListDto);
->>>>>>> Stashed changes
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
