@@ -30,10 +30,18 @@ public class LogService {
         Map map = new HashMap<String, List<LogDTO>>();
         List<LogDTO> logs = logRepository.findAll().stream().map(logDtoMapper).collect(Collectors.toList());
         try {
+<<<<<<< Updated upstream
             map.put("logs", logs);
             map.put("length", logs.size());
             response.setData(map);
             response.setSuccess(true);
+=======
+            LogListDto logListDto = LogListDto.builder()
+                    .logs(logs)
+                    .rowCount(logs.size())
+                    .build();
+            response.setData(logListDto);
+>>>>>>> Stashed changes
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
@@ -46,7 +54,6 @@ public class LogService {
         Response response = new Response();
         try {
             logRepository.save(command.toEntity());
-            response.setSuccess(true);
             response.setMessage("New record saved!");
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {

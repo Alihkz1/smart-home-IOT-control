@@ -36,8 +36,12 @@ public class ProductService {
         Response response = new Response<>();
         try {
             productRepository.save(command.toEntity());
+<<<<<<< Updated upstream
             response.setSuccess(true);
             response.setMessage("New record saved!");
+=======
+            response.setMessage("new record saved!");
+>>>>>>> Stashed changes
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
@@ -51,10 +55,18 @@ public class ProductService {
         Map map = new HashMap<String, List<ProductDTO>>();
         List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper).collect(Collectors.toList());
         try {
+<<<<<<< Updated upstream
             map.put("products", products);
             map.put("length", products.size());
             response.setData(map);
             response.setSuccess(true);
+=======
+            ProductListDto productListDto = ProductListDto.builder()
+                    .products(products)
+                    .rowCount(products.size())
+                    .build();
+            response.setData(productListDto);
+>>>>>>> Stashed changes
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
@@ -70,7 +82,6 @@ public class ProductService {
         if (product.isPresent()) {
             map.put("Product", product);
             response.setData(map);
-            response.setSuccess(true);
             return ResponseEntity.ok().body(response);
         } else return ResponseEntity.notFound().build();
     }
@@ -81,8 +92,12 @@ public class ProductService {
         Product product = productRepository.findById(command.getID()).orElseThrow(() -> new IllegalArgumentException("Not Found"));
         try {
             productRepository.save(command.toEntity());
+<<<<<<< Updated upstream
             response.setMessage("Product updated");
             response.setSuccess(true);
+=======
+            response.setMessage("product updated");
+>>>>>>> Stashed changes
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.setMessage(e.getMessage());
@@ -96,7 +111,6 @@ public class ProductService {
         Response response = new Response();
         try {
             productRepository.deleteById(id);
-            response.setSuccess(true);
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
