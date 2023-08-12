@@ -28,21 +28,19 @@ public class UserService {
 
     @Autowired
     public UserService(UserRepository userRepository,
-                       JWTService jwtService,
-                       PasswordEncoder passwordEncoder,
-                       UserDtoMapper userDtoMapper) {
+            JWTService jwtService,
+            PasswordEncoder passwordEncoder,
+            UserDtoMapper userDtoMapper) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;
         this.userDtoMapper = userDtoMapper;
     }
 
-    public ResponseEntity<Response> getAllUsers() {
+    public ResponseEntity<Response<UserListDto>> getAllUsers() {
         Response response = new Response();
-        Map map = new HashMap<String, List<UserDTO>>();
         try {
-            List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper
-            ).collect(Collectors.toList());
+            List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper).collect(Collectors.toList());
             UserListDto userListDto = UserListDto.builder()
                     .users(users)
                     .rowCount(users.size())
@@ -55,7 +53,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<Response<String>> signup(SignUpCommand user) {
+    public ResponseEntity<Response> signup(SignUpCommand user) {
         Response response = new Response();
         if (user.getName() == null)
             throw new IllegalArgumentException("name is required.");
@@ -82,7 +80,7 @@ public class UserService {
         User existUser = userRepository.login(user.getUsername());
         if (existUser == null) {
             response.setSuccess(false);
-            response.setMessage("Incorrect username or password!");
+            response.setMessage("incorrect username or password!");
             return ResponseEntity.badRequest().body(response);
         }
         boolean passwordMatches = passwordEncoder.matches(user.getPassword(), existUser.getPassword());
@@ -100,10 +98,9 @@ public class UserService {
             return ResponseEntity.ok().body(response);
         } else {
             response.setSuccess(false);
-            response.setMessage("Incorrect username or password!");
+            response.setMessage("incorrect username or password!");
             return ResponseEntity.badRequest().body(response);
         }
     }
-
 
 }

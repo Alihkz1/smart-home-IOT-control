@@ -2,6 +2,7 @@ package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.command.LoginCommand;
 import ir.znu.znuproject.command.SignUpCommand;
+import ir.znu.znuproject.dto.UserListDto;
 import ir.znu.znuproject.service.UserService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,12 @@ public class UserController {
     }
 
     @GetMapping(path = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> list() {
+    public ResponseEntity<Response<UserListDto>> list() {
         return userService.getAllUsers();
     }
 
     @PostMapping(path = "signup", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response<String>> signup(@RequestBody(required = true) SignUpCommand command) {
+    public ResponseEntity<Response> signup(@RequestBody(required = true) SignUpCommand command) {
         return userService.signup(command);
     }
 

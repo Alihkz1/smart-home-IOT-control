@@ -27,8 +27,7 @@ public class ProductService {
     private final ProductDtoMapper productDtoMapper;
 
     @Autowired
-    public ProductService(ProductRepository productRepository, ProductDtoMapper productDtoMapper
-    ) {
+    public ProductService(ProductRepository productRepository, ProductDtoMapper productDtoMapper) {
         this.productRepository = productRepository;
         this.productDtoMapper = productDtoMapper;
     }
@@ -46,10 +45,10 @@ public class ProductService {
         }
     }
 
-    public ResponseEntity<Response> getAllProducts() {
+    public ResponseEntity<Response<ProductListDto>> getList() {
         Response response = new Response();
-        Map map = new HashMap<String, List<ProductDTO>>();
-        List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper).collect(Collectors.toList());
+        List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper)
+                .collect(Collectors.toList());
         try {
             ProductListDto productListDto = ProductListDto.builder()
                     .products(products)
@@ -59,7 +58,7 @@ public class ProductService {
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
-            response.setMessage("Error occurred!");
+            response.setMessage("error occurred!");
             return ResponseEntity.internalServerError().body(response);
         }
     }
@@ -72,13 +71,15 @@ public class ProductService {
             map.put("Product", product);
             response.setData(map);
             return ResponseEntity.ok().body(response);
-        } else return ResponseEntity.notFound().build();
+        } else
+            return ResponseEntity.notFound().build();
     }
 
     @Transactional
     public ResponseEntity<Response> editProduct(ProductEditCommand command) {
         Response response = new Response();
-        Product product = productRepository.findById(command.getID()).orElseThrow(() -> new IllegalArgumentException("Not Found"));
+        Product product = productRepository.findById(command.getID())
+                .orElseThrow(() -> new IllegalArgumentException("Not Found"));
         try {
             productRepository.save(command.toEntity());
             response.setMessage("product updated");
@@ -98,7 +99,7 @@ public class ProductService {
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
-            response.setMessage("Error occurred!");
+            response.setMessage("error occurred!");
             return ResponseEntity.internalServerError().body(response);
 
         }
