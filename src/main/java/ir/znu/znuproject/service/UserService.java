@@ -111,4 +111,11 @@ public class UserService {
         return ResponseEntity.ok(response);
     }
 
+    public ResponseEntity<Response> deleteAll() {
+        Response response = new Response();
+        userRepository.deleteAll();
+        response.setMessage("users list cleared.");
+        return ResponseEntity.ok(response);
+    }
+
 }

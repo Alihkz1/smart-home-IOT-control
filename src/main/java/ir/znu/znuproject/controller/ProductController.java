@@ -46,5 +46,9 @@ public class ProductController {
         return productService.deleteById(id);
     }
 
+    @DeleteMapping(path = "deleteall",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> deleteAll(){
+        return productService.deleteAll();
+    }
 
 }

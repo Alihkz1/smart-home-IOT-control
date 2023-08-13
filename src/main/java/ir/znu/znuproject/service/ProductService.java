@@ -101,7 +101,13 @@ public class ProductService {
             response.setSuccess(false);
             response.setMessage("error occurred!");
             return ResponseEntity.internalServerError().body(response);
-
         }
+    }
+
+    public ResponseEntity<Response> deleteAll() {
+        Response response = new Response();
+        productRepository.deleteAll();
+        response.setMessage("products list cleared.");
+        return ResponseEntity.ok(response);
     }
 }

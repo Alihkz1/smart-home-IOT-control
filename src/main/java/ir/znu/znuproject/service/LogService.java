@@ -54,7 +54,13 @@ public class LogService {
             response.setMessage(e.toString());
             return ResponseEntity.internalServerError().body(response);
         }
+    }
 
+    public ResponseEntity<Response> deleteAll() {
+        Response response = new Response();
+        logRepository.deleteAll();
+        response.setMessage("log history cleared.");
+        return ResponseEntity.ok(response);
     }
 
 }

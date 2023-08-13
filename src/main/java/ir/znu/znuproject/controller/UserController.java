@@ -41,4 +41,9 @@ public class UserController {
     public ResponseEntity<Response> changePassword(@RequestBody(required = true) ChangePasswordCommand command) {
         return userService.changePassword(command);
     }
+
+    @DeleteMapping(path = "deleteall", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> deleteAll() {
+        return userService.deleteAll();
+    }
 }

@@ -28,6 +28,10 @@ public class LogController {
     @PostMapping(path = "create", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Response> create(@RequestBody(required = true) LogCreateCommand command) {
         return logService.save(command);
+    }
 
+    @DeleteMapping(path = "deleteall",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> deleteAll(){
+        return logService.deleteAll();
     }
 }
