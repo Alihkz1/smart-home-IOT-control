@@ -7,7 +7,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class UserListDto {
+public class UserListDTO {
     private List<UserDTO> users;
     private Integer rowCount;
 

@@ -1,7 +1,7 @@
 package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.command.LogCreateCommand;
-import ir.znu.znuproject.dto.LogListDto;
+import ir.znu.znuproject.dto.LogListDTO;
 import ir.znu.znuproject.service.LogService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class LogController {
     }
 
     @GetMapping(path = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response<LogListDto>> list() {
+    public ResponseEntity<Response<LogListDTO>> list() {
         return logService.getAllLogs();
     }
 

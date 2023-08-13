@@ -3,10 +3,10 @@ package ir.znu.znuproject.service;
 import ir.znu.znuproject.command.ChangePasswordCommand;
 import ir.znu.znuproject.command.LoginCommand;
 import ir.znu.znuproject.command.SignUpCommand;
-import ir.znu.znuproject.dto.LoginDto;
+import ir.znu.znuproject.dto.LoginDTO;
 import ir.znu.znuproject.dto.UserDTO;
 import ir.znu.znuproject.dto.UserDtoMapper;
-import ir.znu.znuproject.dto.UserListDto;
+import ir.znu.znuproject.dto.UserListDTO;
 import ir.znu.znuproject.model.User;
 import ir.znu.znuproject.repository.UserRepository;
 import ir.znu.znuproject.shared.JWTService;
@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -38,11 +37,11 @@ public class UserService {
         this.userDtoMapper = userDtoMapper;
     }
 
-    public ResponseEntity<Response<UserListDto>> getAllUsers() {
+    public ResponseEntity<Response<UserListDTO>> getAllUsers() {
         Response response = new Response();
         try {
             List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper).collect(Collectors.toList());
-            UserListDto userListDto = UserListDto.builder()
+            UserListDTO userListDto = UserListDTO.builder()
                     .users(users)
                     .rowCount(users.size())
                     .build();
@@ -90,7 +89,7 @@ public class UserService {
                     .filter(el -> el.getUsername().equals(user.getUsername()))
                     .map(userDtoMapper).findFirst();
             var token = jwtService.generateToken(existUser);
-            LoginDto loginDto = LoginDto.builder()
+            LoginDTO loginDto = LoginDTO.builder()
                     .token(token)
                     .user(responseUser)
                     .build();

@@ -5,7 +5,7 @@ import ir.znu.znuproject.command.ProductEditCommand;
 
 import ir.znu.znuproject.dto.ProductDTO;
 import ir.znu.znuproject.dto.ProductDtoMapper;
-import ir.znu.znuproject.dto.ProductListDto;
+import ir.znu.znuproject.dto.ProductListDTO;
 import ir.znu.znuproject.model.Product;
 import ir.znu.znuproject.repository.ProductRepository;
 import ir.znu.znuproject.shared.Response;
@@ -45,12 +45,12 @@ public class ProductService {
         }
     }
 
-    public ResponseEntity<Response<ProductListDto>> getList() {
+    public ResponseEntity<Response<ProductListDTO>> getList() {
         Response response = new Response();
         List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper)
                 .collect(Collectors.toList());
         try {
-            ProductListDto productListDto = ProductListDto.builder()
+            ProductListDTO productListDto = ProductListDTO.builder()
                     .products(products)
                     .rowCount(products.size())
                     .build();
