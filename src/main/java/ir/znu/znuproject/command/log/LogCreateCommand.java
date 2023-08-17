@@ -1,4 +1,4 @@
-package ir.znu.znuproject.command;
+package ir.znu.znuproject.command.log;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;

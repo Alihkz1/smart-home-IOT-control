@@ -1,8 +1,8 @@
 package ir.znu.znuproject.controller;
 
-import ir.znu.znuproject.command.ProductCreateCommand;
-import ir.znu.znuproject.command.ProductEditCommand;
-import ir.znu.znuproject.dto.ProductListDTO;
+import ir.znu.znuproject.command.product.ProductCreateCommand;
+import ir.znu.znuproject.command.product.ProductEditCommand;
+import ir.znu.znuproject.dto.product.ProductListDTO;
 import ir.znu.znuproject.service.ProductService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;

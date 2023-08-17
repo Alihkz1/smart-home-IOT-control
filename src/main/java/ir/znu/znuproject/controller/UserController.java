@@ -1,10 +1,10 @@
 package ir.znu.znuproject.controller;
 
-import ir.znu.znuproject.command.ChangePasswordCommand;
-import ir.znu.znuproject.command.DeleteUserCommand;
-import ir.znu.znuproject.command.LoginCommand;
-import ir.znu.znuproject.command.SignUpCommand;
-import ir.znu.znuproject.dto.UserListDTO;
+import ir.znu.znuproject.command.user.ChangePasswordCommand;
+import ir.znu.znuproject.command.user.DeleteUserCommand;
+import ir.znu.znuproject.command.user.LoginCommand;
+import ir.znu.znuproject.command.user.SignUpCommand;
+import ir.znu.znuproject.dto.user.UserListDTO;
 import ir.znu.znuproject.service.UserService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;

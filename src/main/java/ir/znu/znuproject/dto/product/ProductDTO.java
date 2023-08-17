@@ -1,4 +1,4 @@
-package ir.znu.znuproject.dto;
+package ir.znu.znuproject.dto.product;
 
 public record ProductDTO(
         Long ID,

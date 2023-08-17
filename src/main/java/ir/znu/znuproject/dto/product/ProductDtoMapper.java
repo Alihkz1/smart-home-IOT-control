@@ -1,5 +1,6 @@
-package ir.znu.znuproject.dto;
+package ir.znu.znuproject.dto.product;
 
+import ir.znu.znuproject.dto.product.ProductDTO;
 import ir.znu.znuproject.model.Product;
 import org.springframework.stereotype.Service;
 

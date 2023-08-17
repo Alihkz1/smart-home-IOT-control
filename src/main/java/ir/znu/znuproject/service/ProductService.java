@@ -1,11 +1,11 @@
 package ir.znu.znuproject.service;
 
-import ir.znu.znuproject.command.ProductCreateCommand;
-import ir.znu.znuproject.command.ProductEditCommand;
+import ir.znu.znuproject.command.product.ProductCreateCommand;
+import ir.znu.znuproject.command.product.ProductEditCommand;
 
-import ir.znu.znuproject.dto.ProductDTO;
-import ir.znu.znuproject.dto.ProductDtoMapper;
-import ir.znu.znuproject.dto.ProductListDTO;
+import ir.znu.znuproject.dto.product.ProductDTO;
+import ir.znu.znuproject.dto.product.ProductDtoMapper;
+import ir.znu.znuproject.dto.product.ProductListDTO;
 import ir.znu.znuproject.model.Product;
 import ir.znu.znuproject.repository.ProductRepository;
 import ir.znu.znuproject.shared.Response;

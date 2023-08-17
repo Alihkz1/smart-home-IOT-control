@@ -1,4 +1,4 @@
-package ir.znu.znuproject.command;
+package ir.znu.znuproject.command.product;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.znu.znuproject.model.Product;

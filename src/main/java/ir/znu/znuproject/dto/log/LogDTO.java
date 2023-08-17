@@ -1,4 +1,4 @@
-package ir.znu.znuproject.dto;
+package ir.znu.znuproject.dto.log;
 
 public record LogDTO(
         String content,

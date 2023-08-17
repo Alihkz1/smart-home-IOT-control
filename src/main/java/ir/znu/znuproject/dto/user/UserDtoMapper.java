@@ -1,5 +1,6 @@
-package ir.znu.znuproject.dto;
+package ir.znu.znuproject.dto.user;
 
+import ir.znu.znuproject.dto.user.UserDTO;
 import ir.znu.znuproject.model.User;
 import org.springframework.stereotype.Service;
 

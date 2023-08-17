@@ -1,5 +1,6 @@
-package ir.znu.znuproject.dto;
+package ir.znu.znuproject.dto.log;
 
+import ir.znu.znuproject.dto.log.LogDTO;
 import ir.znu.znuproject.model.Log;
 import org.springframework.stereotype.Service;
 

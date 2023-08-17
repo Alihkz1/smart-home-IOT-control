@@ -1,4 +1,4 @@
-package ir.znu.znuproject.dto;
+package ir.znu.znuproject.dto.user;
 
 import lombok.Builder;
 import lombok.Getter;

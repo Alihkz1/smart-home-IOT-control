@@ -1,5 +1,6 @@
-package ir.znu.znuproject.dto;
+package ir.znu.znuproject.dto.product;
 
+import ir.znu.znuproject.dto.product.ProductDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

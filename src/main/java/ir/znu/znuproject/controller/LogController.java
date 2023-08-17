@@ -1,7 +1,7 @@
 package ir.znu.znuproject.controller;
 
-import ir.znu.znuproject.command.LogCreateCommand;
-import ir.znu.znuproject.dto.LogListDTO;
+import ir.znu.znuproject.command.log.LogCreateCommand;
+import ir.znu.znuproject.dto.log.LogListDTO;
 import ir.znu.znuproject.service.LogService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;

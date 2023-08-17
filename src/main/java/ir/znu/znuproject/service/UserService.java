@@ -1,13 +1,13 @@
 package ir.znu.znuproject.service;
 
-import ir.znu.znuproject.command.ChangePasswordCommand;
-import ir.znu.znuproject.command.DeleteUserCommand;
-import ir.znu.znuproject.command.LoginCommand;
-import ir.znu.znuproject.command.SignUpCommand;
-import ir.znu.znuproject.dto.LoginDTO;
-import ir.znu.znuproject.dto.UserDTO;
-import ir.znu.znuproject.dto.UserDtoMapper;
-import ir.znu.znuproject.dto.UserListDTO;
+import ir.znu.znuproject.command.user.ChangePasswordCommand;
+import ir.znu.znuproject.command.user.DeleteUserCommand;
+import ir.znu.znuproject.command.user.LoginCommand;
+import ir.znu.znuproject.command.user.SignUpCommand;
+import ir.znu.znuproject.dto.user.LoginDTO;
+import ir.znu.znuproject.dto.user.UserDTO;
+import ir.znu.znuproject.dto.user.UserDtoMapper;
+import ir.znu.znuproject.dto.user.UserListDTO;
 import ir.znu.znuproject.model.User;
 import ir.znu.znuproject.repository.UserRepository;
 import ir.znu.znuproject.shared.JWTService;

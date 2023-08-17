@@ -1,4 +1,4 @@
-package ir.znu.znuproject.command;
+package ir.znu.znuproject.command.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
