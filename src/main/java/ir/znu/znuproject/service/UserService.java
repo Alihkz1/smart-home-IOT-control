@@ -1,6 +1,7 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.command.ChangePasswordCommand;
+import ir.znu.znuproject.command.DeleteUserCommand;
 import ir.znu.znuproject.command.LoginCommand;
 import ir.znu.znuproject.command.SignUpCommand;
 import ir.znu.znuproject.dto.LoginDTO;
@@ -114,6 +115,13 @@ public class UserService {
         Response response = new Response();
         userRepository.deleteAll();
         response.setMessage("users list cleared.");
+        return ResponseEntity.ok(response);
+    }
+
+    public ResponseEntity<Response> deleteByUsername(DeleteUserCommand command) {
+        Response response = new Response();
+        userRepository.deleteByByUsername(command.getUsername());
+        response.setMessage(String.format("User %s deleted.", command.getUsername()));
         return ResponseEntity.ok(response);
     }
 

@@ -1,6 +1,7 @@
 package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.command.ChangePasswordCommand;
+import ir.znu.znuproject.command.DeleteUserCommand;
 import ir.znu.znuproject.command.LoginCommand;
 import ir.znu.znuproject.command.SignUpCommand;
 import ir.znu.znuproject.dto.UserListDTO;
@@ -45,5 +46,10 @@ public class UserController {
     @DeleteMapping(path = "deleteall", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Response> deleteAll() {
         return userService.deleteAll();
+    }
+
+    @DeleteMapping(path = "deleteuser", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> deleteByUsername(@RequestBody(required = true) DeleteUserCommand command) {
+        return userService.deleteByUsername(command);
     }
 }
