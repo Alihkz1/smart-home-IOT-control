@@ -120,7 +120,7 @@ public class UserService {
 
     public ResponseEntity<Response> deleteByUsername(DeleteUserCommand command) {
         Response response = new Response();
-        userRepository.deleteByByUsername(command.getUsername());
+        userRepository.deleteByUsername(command.getUsername());
         response.setMessage(String.format("User %s deleted.", command.getUsername()));
         return ResponseEntity.ok(response);
     }
