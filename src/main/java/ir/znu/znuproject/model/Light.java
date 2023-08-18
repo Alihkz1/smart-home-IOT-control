@@ -1,5 +1,6 @@
 package ir.znu.znuproject.model;
 
+import ir.znu.znuproject.shared.SWITCH;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,7 +19,8 @@ public class Light {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long RecordID;
 
-    private String Status;
+    @Enumerated(EnumType.STRING)
+    private SWITCH Status;
 
     @Column(nullable = false)
     private Long date;
