@@ -4,13 +4,18 @@ public enum SWITCH {
     ON("ON"),
     OFF("OFF");
 
-    private String v;
+    private String value;
 
-    SWITCH(String v) {
-        this.v = v;
+    SWITCH(String value) {
+        this.value = value;
     }
 
-    public String getSWITCH() {
-        return v;
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }
