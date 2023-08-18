@@ -1,4 +1,4 @@
-package ir.znu.znuproject.command.Heater;
+package ir.znu.znuproject.command.heater;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.znu.znuproject.model.Heater;

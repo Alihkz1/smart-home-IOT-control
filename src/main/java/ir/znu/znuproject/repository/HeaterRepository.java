@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HeaterRepository extends JpaRepository<Heater, Long> {
 
-    @Query(value = "SELECT Status from heater ORDER BY RecordID DESC LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM heater ORDER BY RecordID DESC LIMIT 1", nativeQuery = true)
     public Heater getStatus();
 }

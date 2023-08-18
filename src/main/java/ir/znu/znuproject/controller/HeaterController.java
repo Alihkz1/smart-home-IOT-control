@@ -1,6 +1,6 @@
 package ir.znu.znuproject.controller;
 
-import ir.znu.znuproject.command.Heater.HeaterChangeCommand;
+import ir.znu.znuproject.command.heater.HeaterChangeCommand;
 import ir.znu.znuproject.service.HeaterService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
