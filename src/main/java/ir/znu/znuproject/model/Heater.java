@@ -1,5 +1,6 @@
 package ir.znu.znuproject.model;
 
+import ir.znu.znuproject.shared.SWITCH;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ public class Heater {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long RecordID;
 
-    private String Status;
+    private SWITCH Status;
 
     @Column(nullable = false)
     private Long date;
