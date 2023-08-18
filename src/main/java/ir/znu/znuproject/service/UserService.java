@@ -26,20 +26,24 @@ public class UserService {
     private final JWTService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final UserDtoMapper userDtoMapper;
+    private final Response response;
+
 
     @Autowired
     public UserService(UserRepository userRepository,
                        JWTService jwtService,
                        PasswordEncoder passwordEncoder,
-                       UserDtoMapper userDtoMapper) {
+                       UserDtoMapper userDtoMapper,
+                       Response response
+    ) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.passwordEncoder = passwordEncoder;
         this.userDtoMapper = userDtoMapper;
+        this.response = response;
     }
 
     public ResponseEntity<Response<UserListDTO>> getAllUsers() {
-        Response response = new Response();
         try {
             List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper).collect(Collectors.toList());
             UserListDTO userListDto = UserListDTO.builder()
@@ -55,7 +59,6 @@ public class UserService {
     }
 
     public ResponseEntity<Response> signup(SignUpCommand user) {
-        Response response = new Response();
         if (user.getName() == null)
             throw new IllegalArgumentException("name is required.");
         Optional<User> existUser = userRepository.findAll().stream()
@@ -77,7 +80,6 @@ public class UserService {
     }
 
     public ResponseEntity<Response> login(LoginCommand user) {
-        Response response = new Response();
         User existUser = userRepository.login(user.getUsername());
         if (existUser == null) {
             response.setSuccess(false);
@@ -105,21 +107,18 @@ public class UserService {
     }
 
     public ResponseEntity<Response> changePassword(ChangePasswordCommand command) {
-        Response response = new Response();
         userRepository.changePassword(command.getID(), passwordEncoder.encode(command.getPassword()));
         response.setMessage("password changed.");
         return ResponseEntity.ok(response);
     }
 
     public ResponseEntity<Response> deleteAll() {
-        Response response = new Response();
         userRepository.deleteAll();
         response.setMessage("users list cleared.");
         return ResponseEntity.ok(response);
     }
 
     public ResponseEntity<Response> deleteByUsername(DeleteUserCommand command) {
-        Response response = new Response();
         userRepository.deleteByUsername(command.getUsername());
         response.setMessage(String.format("User %s deleted.", command.getUsername()));
         return ResponseEntity.ok(response);

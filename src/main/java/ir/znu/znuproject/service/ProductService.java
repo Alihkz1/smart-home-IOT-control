@@ -25,15 +25,17 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductDtoMapper productDtoMapper;
+    private final Response response;
 
     @Autowired
-    public ProductService(ProductRepository productRepository, ProductDtoMapper productDtoMapper) {
+    public ProductService(ProductRepository productRepository, ProductDtoMapper productDtoMapper, Response response) {
         this.productRepository = productRepository;
         this.productDtoMapper = productDtoMapper;
+        this.response = response;
+
     }
 
     public ResponseEntity<Response> create(ProductCreateCommand command) {
-        Response response = new Response<>();
         try {
             productRepository.save(command.toEntity());
             response.setMessage("new record saved!");
@@ -46,7 +48,6 @@ public class ProductService {
     }
 
     public ResponseEntity<Response<ProductListDTO>> getList() {
-        Response response = new Response();
         List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper)
                 .collect(Collectors.toList());
         try {
@@ -64,7 +65,6 @@ public class ProductService {
     }
 
     public ResponseEntity<Response> findById(Long id) {
-        Response response = new Response();
         Map map = new HashMap<String, List<ProductDTO>>();
         Optional<Product> product = productRepository.findById(id);
         if (product.isPresent()) {
@@ -77,7 +77,6 @@ public class ProductService {
 
     @Transactional
     public ResponseEntity<Response> editProduct(ProductEditCommand command) {
-        Response response = new Response();
         Product product = productRepository.findById(command.getID())
                 .orElseThrow(() -> new IllegalArgumentException("Not Found"));
         try {
@@ -93,7 +92,6 @@ public class ProductService {
     }
 
     public ResponseEntity<Response> deleteById(Long id) {
-        Response response = new Response();
         try {
             productRepository.deleteById(id);
             return ResponseEntity.ok().body(response);
@@ -105,7 +103,6 @@ public class ProductService {
     }
 
     public ResponseEntity<Response> deleteAll() {
-        Response response = new Response();
         productRepository.deleteAll();
         response.setMessage("products list cleared.");
         return ResponseEntity.ok(response);

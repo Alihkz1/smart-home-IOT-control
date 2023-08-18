@@ -17,15 +17,16 @@ import java.util.stream.Collectors;
 public class LogService {
     private final LogRepository logRepository;
     private final LogDtoMapper logDtoMapper;
+    private final Response response;
 
     @Autowired
-    public LogService(LogRepository logRepository, LogDtoMapper logDtoMapper) {
+    public LogService(LogRepository logRepository, LogDtoMapper logDtoMapper, Response response) {
         this.logRepository = logRepository;
         this.logDtoMapper = logDtoMapper;
+        this.response = response;
     }
 
     public ResponseEntity<Response<LogListDTO>> getAllLogs() {
-        Response response = new Response();
         List<LogDTO> logs = logRepository.findAll().stream().map(logDtoMapper).collect(Collectors.toList());
         try {
             LogListDTO logListDto = LogListDTO.builder()
@@ -42,7 +43,6 @@ public class LogService {
     }
 
     public ResponseEntity<Response> save(LogCreateCommand command) {
-        Response response = new Response();
         try {
             logRepository.save(command.toEntity());
             response.setMessage("New record saved!");
@@ -55,7 +55,6 @@ public class LogService {
     }
 
     public ResponseEntity<Response> deleteAll() {
-        Response response = new Response();
         logRepository.deleteAll();
         response.setMessage("log history cleared.");
         return ResponseEntity.ok(response);
