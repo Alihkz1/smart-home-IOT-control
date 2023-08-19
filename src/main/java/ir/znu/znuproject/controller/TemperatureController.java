@@ -1,9 +1,11 @@
 package ir.znu.znuproject.controller;
 
+import ir.znu.znuproject.command.Temperature.TemperatureChangeCommand;
 import ir.znu.znuproject.service.TemperatureService;
+import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping("api/v1/temperature")
@@ -14,5 +16,15 @@ public class TemperatureController {
     @Autowired
     public TemperatureController(TemperatureService temperatureService) {
         this.temperatureService = temperatureService;
+    }
+
+    @PostMapping(path = "change")
+    public ResponseEntity<Response> change(@RequestBody TemperatureChangeCommand command) {
+        return temperatureService.change(command);
+    }
+
+    @GetMapping(path = "value")
+    public ResponseEntity<Response> value() {
+        return temperatureService.value();
     }
 }
