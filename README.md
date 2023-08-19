@@ -1,8 +1,25 @@
-# znu-project
-java api for Bsc project  - university of zanjan
-this project has a few apis listed blow:
-1- user login
-2- user register
-3- registerd users list
-4- add log (posting string value and its saving time)
-5- get logs list
+# University of Zanjan Final Project
+
+this application includes restfull apis, uses postgresql database.
+
+## Installation
+
+Use Maven Installers to download and install dependancies.
+
+## Features
+
+```
+ - Login and signup users and get users list, also modify and delete users.
+ - Save and read sensors data.
+ - Create products list.
+
+```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+## Creator
+
+[Ali Hosseinkhani](https://www.linkedin.com/in/alihkz/)
