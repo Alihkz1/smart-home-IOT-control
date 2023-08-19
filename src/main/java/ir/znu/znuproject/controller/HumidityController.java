@@ -4,6 +4,7 @@ import ir.znu.znuproject.command.Humidity.HumidityChangeCommand;
 import ir.znu.znuproject.service.HumidityService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,5 +27,10 @@ public class HumidityController {
     @GetMapping(path = "value")
     public ResponseEntity<Response> value() {
         return humidityService.value();
+    }
+
+    @DeleteMapping(path = "deleteall", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> deleteAll() {
+        return humidityService.deleteAll();
     }
 }

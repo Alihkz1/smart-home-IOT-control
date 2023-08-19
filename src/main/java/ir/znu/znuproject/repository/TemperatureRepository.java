@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface TemperatureRepository extends JpaRepository<Temperature, Long> {
     @Query(value = "SELECT * FROM temperature ORDER BY RecordID DESC LIMIT 1", nativeQuery = true)
     public Temperature getValue();
+
+
 }

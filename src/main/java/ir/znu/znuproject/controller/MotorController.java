@@ -4,6 +4,7 @@ import ir.znu.znuproject.command.motor.MotorChangeCommand;
 import ir.znu.znuproject.service.MotorService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,5 +27,10 @@ public class MotorController {
     @GetMapping(path = "status")
     public ResponseEntity<Response> status() {
         return motorService.status();
+    }
+
+    @DeleteMapping(path = "deleteall", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> deleteAll() {
+        return motorService.deleteAll();
     }
 }

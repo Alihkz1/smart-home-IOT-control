@@ -28,4 +28,10 @@ public class MotorService {
         response.setData(repository.getStatus());
         return ResponseEntity.ok(response);
     }
+
+    public ResponseEntity<Response> deleteAll() {
+        repository.deleteAll();
+        response.setMessage("motor activity list cleared.");
+        return ResponseEntity.ok(response);
+    }
 }

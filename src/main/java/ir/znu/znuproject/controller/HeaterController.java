@@ -4,6 +4,7 @@ import ir.znu.znuproject.command.heater.HeaterChangeCommand;
 import ir.znu.znuproject.service.HeaterService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +22,15 @@ public class HeaterController {
     @PostMapping(path = "change")
     public ResponseEntity<Response> change(@RequestBody HeaterChangeCommand command) {
         return heaterService.change(command);
-
     }
 
     @GetMapping(path = "status")
     public ResponseEntity<Response> status() {
         return heaterService.status();
+    }
+
+    @DeleteMapping(path = "deleteall", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> deleteAll() {
+        return heaterService.deleteAll();
     }
 }

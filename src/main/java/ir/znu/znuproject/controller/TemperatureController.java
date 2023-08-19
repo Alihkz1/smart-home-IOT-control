@@ -4,6 +4,7 @@ import ir.znu.znuproject.command.Temperature.TemperatureChangeCommand;
 import ir.znu.znuproject.service.TemperatureService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,5 +27,10 @@ public class TemperatureController {
     @GetMapping(path = "value")
     public ResponseEntity<Response> value() {
         return temperatureService.value();
+    }
+
+    @DeleteMapping(path = "deleteall", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> deleteAll() {
+        return temperatureService.deleteAll();
     }
 }

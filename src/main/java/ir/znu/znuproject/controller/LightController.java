@@ -4,6 +4,7 @@ import ir.znu.znuproject.command.Light.LightChangeCommand;
 import ir.znu.znuproject.service.LightService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,5 +26,10 @@ public class LightController {
     @GetMapping(path = "status")
     public ResponseEntity<Response> status() {
         return lightService.status();
+    }
+
+    @DeleteMapping(path = "deleteall", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> deleteAll() {
+        return lightService.deleteAll();
     }
 }

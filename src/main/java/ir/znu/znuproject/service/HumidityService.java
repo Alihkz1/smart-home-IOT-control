@@ -28,4 +28,10 @@ public class HumidityService {
         response.setData(repository.getValue());
         return ResponseEntity.ok(response);
     }
+
+    public ResponseEntity<Response> deleteAll() {
+        repository.deleteAll();
+        response.setMessage("humidity history cleared.");
+        return ResponseEntity.ok(response);
+    }
 }

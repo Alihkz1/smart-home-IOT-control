@@ -28,4 +28,10 @@ public class TemperatureService {
         response.setData(repository.getValue());
         return ResponseEntity.ok(response);
     }
+
+    public ResponseEntity<Response> deleteAll() {
+        repository.deleteAll();
+        response.setMessage("temperature list cleared.");
+        return ResponseEntity.ok(response);
+    }
 }

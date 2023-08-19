@@ -27,4 +27,10 @@ public class HeaterService {
         response.setData(repository.getStatus());
         return ResponseEntity.ok(response);
     }
+
+    public ResponseEntity<Response> deleteAll() {
+        repository.deleteAll();
+        response.setMessage("heater history cleared.");
+        return ResponseEntity.ok(response);
+    }
 }
