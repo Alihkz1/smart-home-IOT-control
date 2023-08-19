@@ -21,7 +21,7 @@ public class LightService {
 
     public ResponseEntity<Response> change(LightChangeCommand command) {
         repository.save(command.toEntity());
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new Response());
     }
 
     public ResponseEntity<Response> status() {

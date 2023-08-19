@@ -1,6 +1,7 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.command.Temperature.TemperatureChangeCommand;
+import ir.znu.znuproject.model.Temperature;
 import ir.znu.znuproject.repository.TemperatureRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class TemperatureService {
     }
 
     public ResponseEntity<Response> change(TemperatureChangeCommand command) {
-        repository.save(command.toEntity());
-        return ResponseEntity.ok(response);
+        repository.save(Temperature.builder().Temperature(command.getTemperature()).build());
+        return ResponseEntity.ok(new Response());
     }
 
     public ResponseEntity<Response> value() {

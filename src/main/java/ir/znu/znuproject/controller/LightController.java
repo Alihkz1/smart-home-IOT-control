@@ -20,7 +20,6 @@ public class LightController {
     @PostMapping(path = "change")
     public ResponseEntity<Response> change(@RequestBody LightChangeCommand command) {
         return lightService.change(command);
-
     }
 
     @GetMapping(path = "status")

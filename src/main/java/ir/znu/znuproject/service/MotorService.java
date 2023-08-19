@@ -21,7 +21,7 @@ public class MotorService {
 
     public ResponseEntity<Response> change(MotorChangeCommand command) {
         repository.save(command.toEntity());
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new Response());
     }
 
     public ResponseEntity<Response> status() {

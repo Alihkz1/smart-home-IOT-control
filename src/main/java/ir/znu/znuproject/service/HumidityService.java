@@ -1,6 +1,7 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.command.Humidity.HumidityChangeCommand;
+import ir.znu.znuproject.model.Humidity;
 import ir.znu.znuproject.repository.HumidityRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class HumidityService {
     }
 
     public ResponseEntity<Response> change(HumidityChangeCommand command) {
-        repository.save(command.toEntity());
-        return ResponseEntity.ok(response);
+        repository.save(Humidity.builder().Humidity(command.getHumidity()).build());
+        return ResponseEntity.ok(new Response());
     }
 
     public ResponseEntity<Response> value() {
