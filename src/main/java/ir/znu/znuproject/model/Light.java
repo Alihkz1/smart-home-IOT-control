@@ -22,6 +22,8 @@ public class Light {
     @Enumerated(EnumType.STRING)
     private SWITCH Status;
 
+    private String Intensity;
+
     @Column(nullable = false)
     private Long date;
 

@@ -12,7 +12,10 @@ public class LightChangeCommand {
     @JsonProperty("Status")
     private SWITCH Status;
 
-    public Light toEntity(){
-        return Light.builder().Status(Status).build();
+    @JsonProperty("Intensity")
+    private String Intensity = "";
+
+    public Light toEntity() {
+        return Light.builder().Status(Status).Intensity(Intensity).build();
     }
 }
