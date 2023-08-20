@@ -10,6 +10,8 @@ import ir.znu.znuproject.model.Product;
 import ir.znu.znuproject.repository.ProductRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -47,8 +49,9 @@ public class ProductService {
         }
     }
 
-    public ResponseEntity<Response<ProductListDTO>> getList() {
-        List<ProductDTO> products = productRepository.findAll().stream().map(productDtoMapper)
+    public ResponseEntity<Response<ProductListDTO>> getList(Integer PageIndex, Integer PageSize) {
+        Pageable page = PageRequest.of(PageIndex, PageSize);
+        List<ProductDTO> products = productRepository.findAll(page).stream().map(productDtoMapper)
                 .collect(Collectors.toList());
         try {
             ProductListDTO productListDto = ProductListDTO.builder()

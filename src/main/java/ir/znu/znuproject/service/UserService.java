@@ -1,9 +1,6 @@
 package ir.znu.znuproject.service;
 
-import ir.znu.znuproject.command.user.ChangePasswordCommand;
-import ir.znu.znuproject.command.user.DeleteUserCommand;
-import ir.znu.znuproject.command.user.LoginCommand;
-import ir.znu.znuproject.command.user.SignUpCommand;
+import ir.znu.znuproject.command.user.*;
 import ir.znu.znuproject.dto.user.LoginDTO;
 import ir.znu.znuproject.dto.user.UserDTO;
 import ir.znu.znuproject.dto.user.UserDtoMapper;
@@ -13,9 +10,11 @@ import ir.znu.znuproject.repository.UserRepository;
 import ir.znu.znuproject.shared.JWTService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,9 +42,10 @@ public class UserService {
         this.response = response;
     }
 
-    public ResponseEntity<Response<UserListDTO>> getAllUsers() {
+    public ResponseEntity<Response<UserListDTO>> getAllUsers(Integer PageIndex, Integer PageSize) {
         try {
-            List<UserDTO> users = userRepository.findAll().stream().map(userDtoMapper).collect(Collectors.toList());
+            Pageable pageRequest = PageRequest.of(PageIndex, PageSize);
+            List<UserDTO> users = userRepository.findAll(pageRequest).stream().map(userDtoMapper).collect(Collectors.toList());
             UserListDTO userListDto = UserListDTO.builder()
                     .users(users)
                     .rowCount(users.size())
@@ -54,6 +54,7 @@ public class UserService {
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             response.setSuccess(false);
+            response.setMessage(e.getMessage());
             return ResponseEntity.internalServerError().body(response);
         }
     }

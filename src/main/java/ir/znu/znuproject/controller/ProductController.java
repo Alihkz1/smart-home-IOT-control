@@ -22,8 +22,8 @@ public class ProductController {
     }
 
     @GetMapping(path = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response<ProductListDTO>> list() {
-        return productService.getList();
+    public ResponseEntity<Response<ProductListDTO>> list(@RequestParam(required = false) Integer PageIndex, @RequestParam(required = false) Integer PageSize) {
+        return productService.getList(PageIndex, PageSize);
     }
 
     @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,8 +46,8 @@ public class ProductController {
         return productService.deleteById(id);
     }
 
-    @DeleteMapping(path = "deleteall",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> deleteAll(){
+    @DeleteMapping(path = "deleteall", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> deleteAll() {
         return productService.deleteAll();
     }
 

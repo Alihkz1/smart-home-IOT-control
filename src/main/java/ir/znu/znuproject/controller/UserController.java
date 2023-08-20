@@ -1,9 +1,6 @@
 package ir.znu.znuproject.controller;
 
-import ir.znu.znuproject.command.user.ChangePasswordCommand;
-import ir.znu.znuproject.command.user.DeleteUserCommand;
-import ir.znu.znuproject.command.user.LoginCommand;
-import ir.znu.znuproject.command.user.SignUpCommand;
+import ir.znu.znuproject.command.user.*;
 import ir.znu.znuproject.dto.user.UserListDTO;
 import ir.znu.znuproject.service.UserService;
 import ir.znu.znuproject.shared.Response;
@@ -24,8 +21,8 @@ public class UserController {
     }
 
     @GetMapping(path = "list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response<UserListDTO>> list() {
-        return userService.getAllUsers();
+    public ResponseEntity<Response<UserListDTO>> list(@RequestParam(required = false) Integer PageIndex, @RequestParam(required = false) Integer PageSize) {
+        return userService.getAllUsers(PageIndex, PageSize);
     }
 
     @PostMapping(path = "signup", produces = MediaType.APPLICATION_JSON_VALUE)
