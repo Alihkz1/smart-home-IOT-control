@@ -27,12 +27,16 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
+
     @Column(nullable = false)
     private String username;
+
     @Column(nullable = false)
     private String password;
+
     @Column(nullable = false)
     private LocalDate expireDate;
+
     @Column(nullable = false)
     private String name;
     @JsonProperty("role")

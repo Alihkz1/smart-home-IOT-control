@@ -1,6 +1,6 @@
 package ir.znu.znuproject.model;
 
-import ir.znu.znuproject.shared.SWITCH;
+import ir.znu.znuproject.enums.SWITCH;
 import lombok.*;
 
 import javax.persistence.*;

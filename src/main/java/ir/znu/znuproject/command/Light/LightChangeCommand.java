@@ -2,7 +2,7 @@ package ir.znu.znuproject.command.Light;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.znu.znuproject.model.Light;
-import ir.znu.znuproject.shared.SWITCH;
+import ir.znu.znuproject.enums.SWITCH;
 import lombok.Getter;
 import lombok.Setter;
 

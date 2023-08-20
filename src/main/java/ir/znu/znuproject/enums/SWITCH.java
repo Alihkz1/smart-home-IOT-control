@@ -1,4 +1,4 @@
-package ir.znu.znuproject.shared;
+package ir.znu.znuproject.enums;
 
 public enum SWITCH {
     ON("ON"),

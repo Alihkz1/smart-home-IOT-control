@@ -1,6 +1,6 @@
 package ir.znu.znuproject.model;
 
-import ir.znu.znuproject.shared.SWITCH;
+import ir.znu.znuproject.enums.SWITCH;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,9 +18,9 @@ public class Motor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long RecordID;
+
     @Enumerated(EnumType.STRING)
     private SWITCH Status;
-
     @Column(nullable = false)
     private Long date;
 
