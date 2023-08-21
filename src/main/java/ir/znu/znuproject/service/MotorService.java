@@ -1,6 +1,7 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.command.motor.MotorChangeCommand;
+import ir.znu.znuproject.model.Motor;
 import ir.znu.znuproject.repository.MotorRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class MotorService {
     }
 
     public ResponseEntity<Response> status() {
-        response.setData(repository.getStatus());
+        Motor motor = repository.getStatus();
+        response.setData(motor.getStatus());
         return ResponseEntity.ok(response);
     }
 

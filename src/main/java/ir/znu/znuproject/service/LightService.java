@@ -1,6 +1,7 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.command.Light.LightChangeCommand;
+import ir.znu.znuproject.model.Light;
 import ir.znu.znuproject.repository.LightRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class LightService {
     }
 
     public ResponseEntity<Response> status() {
-        response.setData(repository.getStatus());
+        Light light = repository.getStatus();
+        response.setData(light);
         return ResponseEntity.ok(response);
     }
 

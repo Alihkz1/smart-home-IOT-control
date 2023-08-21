@@ -1,6 +1,7 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.command.heater.HeaterChangeCommand;
+import ir.znu.znuproject.model.Heater;
 import ir.znu.znuproject.repository.HeaterRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,8 @@ public class HeaterService {
     }
 
     public ResponseEntity<Response> status() {
-        response.setData(repository.getStatus());
+        Heater heater = repository.getStatus();
+        response.setData(heater.getStatus());
         return ResponseEntity.ok(response);
     }
 

@@ -25,7 +25,8 @@ public class HumidityService {
     }
 
     public ResponseEntity<Response> value() {
-        response.setData(repository.getValue());
+        Humidity humidity = repository.getValue();
+        response.setData(humidity.getHumidity());
         return ResponseEntity.ok(response);
     }
 

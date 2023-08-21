@@ -25,7 +25,8 @@ public class TemperatureService {
     }
 
     public ResponseEntity<Response> value() {
-        response.setData(repository.getValue());
+        Temperature temperature = repository.getValue();
+        response.setData(temperature.getTemperature());
         return ResponseEntity.ok(response);
     }
 
