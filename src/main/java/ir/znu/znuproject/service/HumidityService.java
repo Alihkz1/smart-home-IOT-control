@@ -24,10 +24,10 @@ public class HumidityService {
         return ResponseEntity.ok(new Response());
     }
 
-    public ResponseEntity<Response> value() {
+    public ResponseEntity<String> value() {
         Humidity humidity = repository.getValue();
         response.setData(humidity.getHumidity());
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(humidity.getHumidity());
     }
 
     public ResponseEntity<Response> deleteAll() {

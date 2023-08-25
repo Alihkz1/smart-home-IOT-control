@@ -1,6 +1,7 @@
 package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.command.heater.HeaterChangeCommand;
+import ir.znu.znuproject.enums.SWITCH;
 import ir.znu.znuproject.service.HeaterService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class HeaterController {
     }
 
     @GetMapping(path = "status")
-    public ResponseEntity<Response> status() {
+    public ResponseEntity<SWITCH> status() {
         return heaterService.status();
     }
 

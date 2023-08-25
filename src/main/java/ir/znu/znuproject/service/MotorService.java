@@ -1,6 +1,7 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.command.motor.MotorChangeCommand;
+import ir.znu.znuproject.enums.SWITCH;
 import ir.znu.znuproject.model.Motor;
 import ir.znu.znuproject.repository.MotorRepository;
 import ir.znu.znuproject.shared.Response;
@@ -25,10 +26,10 @@ public class MotorService {
         return ResponseEntity.ok(new Response());
     }
 
-    public ResponseEntity<Response> status() {
+    public ResponseEntity<SWITCH> status() {
         Motor motor = repository.getStatus();
         response.setData(motor.getStatus());
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(motor.getStatus());
     }
 
     public ResponseEntity<Response> deleteAll() {

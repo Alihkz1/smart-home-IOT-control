@@ -1,6 +1,7 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.command.heater.HeaterChangeCommand;
+import ir.znu.znuproject.enums.SWITCH;
 import ir.znu.znuproject.model.Heater;
 import ir.znu.znuproject.repository.HeaterRepository;
 import ir.znu.znuproject.shared.Response;
@@ -24,10 +25,10 @@ public class HeaterService {
         return ResponseEntity.ok(new Response());
     }
 
-    public ResponseEntity<Response> status() {
+    public ResponseEntity<SWITCH> status() {
         Heater heater = repository.getStatus();
         response.setData(heater.getStatus());
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(heater.getStatus());
     }
 
     public ResponseEntity<Response> deleteAll() {

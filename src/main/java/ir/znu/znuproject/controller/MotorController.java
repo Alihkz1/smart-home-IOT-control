@@ -1,6 +1,7 @@
 package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.command.motor.MotorChangeCommand;
+import ir.znu.znuproject.enums.SWITCH;
 import ir.znu.znuproject.service.MotorService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class MotorController {
     }
 
     @GetMapping(path = "status")
-    public ResponseEntity<Response> status() {
+    public ResponseEntity<SWITCH> status() {
         return motorService.status();
     }
 

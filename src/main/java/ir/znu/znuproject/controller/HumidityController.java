@@ -1,6 +1,7 @@
 package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.command.Humidity.HumidityChangeCommand;
+import ir.znu.znuproject.enums.SWITCH;
 import ir.znu.znuproject.service.HumidityService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class HumidityController {
     }
 
     @GetMapping(path = "value")
-    public ResponseEntity<Response> value() {
+    public ResponseEntity<String> value() {
         return humidityService.value();
     }
 

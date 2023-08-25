@@ -1,6 +1,7 @@
 package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.command.Light.LightChangeCommand;
+import ir.znu.znuproject.enums.SWITCH;
 import ir.znu.znuproject.service.LightService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class LightController {
     }
 
     @GetMapping(path = "status")
-    public ResponseEntity<Response> status() {
+    public ResponseEntity<SWITCH> status() {
         return lightService.status();
     }
 

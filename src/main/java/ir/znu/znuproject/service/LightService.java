@@ -1,6 +1,7 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.command.Light.LightChangeCommand;
+import ir.znu.znuproject.enums.SWITCH;
 import ir.znu.znuproject.model.Light;
 import ir.znu.znuproject.repository.LightRepository;
 import ir.znu.znuproject.shared.Response;
@@ -25,10 +26,10 @@ public class LightService {
         return ResponseEntity.ok(new Response());
     }
 
-    public ResponseEntity<Response> status() {
+    public ResponseEntity<SWITCH> status() {
         Light light = repository.getStatus();
         response.setData(light);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(light.getStatus());
     }
 
     public ResponseEntity<Response> deleteAll() {
