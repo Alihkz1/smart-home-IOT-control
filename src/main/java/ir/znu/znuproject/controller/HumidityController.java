@@ -26,7 +26,7 @@ public class HumidityController {
     }
 
     @GetMapping(path = "value")
-    public ResponseEntity<String> value() {
+    public String value() {
         return humidityService.value();
     }
 

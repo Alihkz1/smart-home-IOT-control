@@ -27,7 +27,7 @@ public class HeaterController {
 
     @GetMapping(path = "status")
     public String status() {
-        return heaterService.status().toString();
+        return heaterService.status();
     }
 
     @DeleteMapping(path = "deleteall", produces = MediaType.APPLICATION_JSON_VALUE)

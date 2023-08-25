@@ -26,10 +26,16 @@ public class LightService {
         return ResponseEntity.ok(new Response());
     }
 
-    public ResponseEntity<SWITCH> status() {
+    public String status() {
         Light light = repository.getStatus();
         response.setData(light);
-        return ResponseEntity.ok(light.getStatus());
+        return light.getStatus().toString();
+    }
+
+    public String intensity() {
+        Light light = repository.getStatus();
+        response.setData(light);
+        return light.getIntensity();
     }
 
     public ResponseEntity<Response> deleteAll() {

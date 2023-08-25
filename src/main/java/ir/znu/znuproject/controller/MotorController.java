@@ -26,7 +26,7 @@ public class MotorController {
     }
 
     @GetMapping(path = "status")
-    public ResponseEntity<SWITCH> status() {
+    public String status() {
         return motorService.status();
     }
 

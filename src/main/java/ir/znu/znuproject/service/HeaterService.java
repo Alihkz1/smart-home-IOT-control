@@ -25,10 +25,10 @@ public class HeaterService {
         return ResponseEntity.ok(new Response());
     }
 
-    public SWITCH status() {
+    public String status() {
         Heater heater = repository.getStatus();
         response.setData(heater.getStatus());
-        return heater.getStatus();
+        return heater.getStatus().toString();
     }
 
     public ResponseEntity<Response> deleteAll() {

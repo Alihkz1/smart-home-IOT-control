@@ -26,10 +26,10 @@ public class MotorService {
         return ResponseEntity.ok(new Response());
     }
 
-    public ResponseEntity<SWITCH> status() {
+    public String status() {
         Motor motor = repository.getStatus();
         response.setData(motor.getStatus());
-        return ResponseEntity.ok(motor.getStatus());
+        return motor.getStatus().toString();
     }
 
     public ResponseEntity<Response> deleteAll() {

@@ -25,7 +25,7 @@ public class TemperatureController {
     }
 
     @GetMapping(path = "value")
-    public ResponseEntity<String> value() {
+    public String value() {
         return temperatureService.value();
     }
 

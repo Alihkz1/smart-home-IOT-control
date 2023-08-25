@@ -24,10 +24,10 @@ public class TemperatureService {
         return ResponseEntity.ok(new Response());
     }
 
-    public ResponseEntity<String> value() {
+    public String value() {
         Temperature temperature = repository.getValue();
         response.setData(temperature.getTemperature());
-        return ResponseEntity.ok(temperature.getTemperature() != null ? temperature.getTemperature() : "");
+        return temperature.getTemperature();
     }
 
     public ResponseEntity<Response> deleteAll() {

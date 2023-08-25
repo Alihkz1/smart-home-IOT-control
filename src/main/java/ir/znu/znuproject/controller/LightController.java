@@ -24,8 +24,13 @@ public class LightController {
         return lightService.change(command);
     }
 
+    @GetMapping(path = "intensity")
+    public String intensity() {
+        return lightService.intensity();
+    }
+
     @GetMapping(path = "status")
-    public ResponseEntity<SWITCH> status() {
+    public String status() {
         return lightService.status();
     }
 
