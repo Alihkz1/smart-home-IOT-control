@@ -26,8 +26,8 @@ public class HeaterController {
     }
 
     @GetMapping(path = "status")
-    public ResponseEntity<SWITCH> status() {
-        return heaterService.status();
+    public String status() {
+        return heaterService.status().toString();
     }
 
     @DeleteMapping(path = "deleteall", produces = MediaType.APPLICATION_JSON_VALUE)
