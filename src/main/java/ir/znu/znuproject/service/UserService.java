@@ -99,6 +99,7 @@ public class UserService {
                     .build();
             response.setMessage("successful login!");
             response.setData(loginDto);
+            response.setSuccess(true);
             return ResponseEntity.ok().body(response);
         } else {
             response.setSuccess(false);
