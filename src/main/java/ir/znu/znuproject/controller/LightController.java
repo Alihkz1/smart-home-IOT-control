@@ -25,7 +25,7 @@ public class LightController {
     }
 
     @GetMapping(path = "intensity")
-    public String intensity() {
+    public Integer intensity() {
         return lightService.intensity();
     }
 
@@ -33,6 +33,7 @@ public class LightController {
     public String status() {
         return lightService.status();
     }
+
 
     @DeleteMapping(path = "deleteall", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Response> deleteAll() {
