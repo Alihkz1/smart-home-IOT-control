@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping("api/v1/humidity")
+@CrossOrigin(origins = "*")
 public class HumidityController {
 
     private final HumidityService humidityService;
