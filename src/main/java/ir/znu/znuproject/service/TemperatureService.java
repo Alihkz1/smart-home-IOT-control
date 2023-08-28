@@ -40,21 +40,6 @@ public class TemperatureService {
     }
 
     public ResponseEntity<Response> change(TemperatureChangeCommand command) {
-        Temperature lastRecord = repository.getLast();
-        MotorChangeCommand motorChangeCommand = new MotorChangeCommand();
-        HeaterChangeCommand heaterChangeCommand = new HeaterChangeCommand();
-        if (Integer.parseInt(lastRecord.getTemperature()) >= Integer.parseInt(command.getTemperature())) {
-            motorChangeCommand.setStatus(SWITCH.ON);
-            heaterChangeCommand.setStatus(SWITCH.OFF);
-            motorService.change(motorChangeCommand);
-            heaterService.change(heaterChangeCommand);
-        }
-        if (Integer.parseInt(lastRecord.getTemperature()) <= Integer.parseInt(command.getTemperature())) {
-            motorChangeCommand.setStatus(SWITCH.OFF);
-            heaterChangeCommand.setStatus(SWITCH.ON);
-            motorService.change(motorChangeCommand);
-            heaterService.change(heaterChangeCommand);
-        }
         repository.save(Temperature.builder().Temperature(command.getTemperature()).build());
         return ResponseEntity.ok(new Response());
     }
@@ -72,6 +57,21 @@ public class TemperatureService {
     }
 
     public ResponseEntity<Response> changeGoal(TemperatureChangeGoalCommand command) {
+        Temperature lastRecord = repository.getLast();
+        MotorChangeCommand motorChangeCommand = new MotorChangeCommand();
+        HeaterChangeCommand heaterChangeCommand = new HeaterChangeCommand();
+        if (Integer.parseInt(lastRecord.getTemperature()) >= command.getGoal()) {
+            motorChangeCommand.setStatus(SWITCH.ON);
+            heaterChangeCommand.setStatus(SWITCH.OFF);
+            motorService.change(motorChangeCommand);
+            heaterService.change(heaterChangeCommand);
+        }
+        if (Integer.parseInt(lastRecord.getTemperature()) <= command.getGoal()) {
+            motorChangeCommand.setStatus(SWITCH.OFF);
+            heaterChangeCommand.setStatus(SWITCH.ON);
+            motorService.change(motorChangeCommand);
+            heaterService.change(heaterChangeCommand);
+        }
         temperatureGoalRepository.save(command.toEntity());
         response.setMessage("goal Saved.");
         response.setSuccess(true);
