@@ -1,7 +1,6 @@
 package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.command.Light.LightChangeCommand;
-import ir.znu.znuproject.enums.SWITCH;
 import ir.znu.znuproject.service.LightService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping("api/v1/light")
+@CrossOrigin(origins = "*")
 public class LightController {
     private final LightService lightService;
 

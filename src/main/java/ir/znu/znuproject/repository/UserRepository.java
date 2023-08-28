@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     public Optional<User> findByUsername(String username);
 
-    @Query(value = "select * from users where username = :username", nativeQuery = true)
+    @Query(value = "select * from users where username = :username LIMIT 1", nativeQuery = true)
     User login(String username);
 
     @Modifying
