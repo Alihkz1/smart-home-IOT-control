@@ -34,6 +34,11 @@ public class LightController {
         return lightService.status();
     }
 
+    @GetMapping(path = "level")
+    public Integer level() {
+        return lightService.level();
+    }
+
 
     @DeleteMapping(path = "deleteall", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Response> deleteAll() {

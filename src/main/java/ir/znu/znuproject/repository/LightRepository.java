@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 
 public interface LightRepository extends JpaRepository<Light, Long> {
-
     @Query(value = "SELECT * FROM light ORDER BY RecordID DESC LIMIT 1", nativeQuery = true)
     public Light getLast();
 }

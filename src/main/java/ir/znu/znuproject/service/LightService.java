@@ -27,8 +27,12 @@ public class LightService {
 
     public String status() {
         Light light = repository.getLast();
-        response.setData(light);
         return light.getStatus().toString();
+    }
+
+    public Integer level() {
+        Light light = repository.getLast();
+        return light.getLevel();
     }
 
     public Integer intensity() {

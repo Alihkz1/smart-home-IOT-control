@@ -15,7 +15,10 @@ public class LightChangeCommand {
     @JsonProperty("Intensity")
     private String Intensity = "";
 
+    @JsonProperty("Level")
+    private Integer Level;
+
     public Light toEntity() {
-        return Light.builder().Status(Status).Intensity(Intensity).build();
+        return Light.builder().Status(Status).Intensity(Intensity).Level(Level).build();
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping("api/v1/temperature")
+@CrossOrigin(origins = "*")
 public class TemperatureController {
 
     private final TemperatureService temperatureService;

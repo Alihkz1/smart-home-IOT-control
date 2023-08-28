@@ -24,6 +24,9 @@ public class Light {
 
     private String Intensity;
 
+    @Column
+    private Integer Level;
+
     @Column(nullable = false)
     private Long date;
 
