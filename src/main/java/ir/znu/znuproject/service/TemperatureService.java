@@ -60,19 +60,25 @@ public class TemperatureService {
         Temperature lastRecord = repository.getLast();
         MotorChangeCommand motorChangeCommand = new MotorChangeCommand();
         HeaterChangeCommand heaterChangeCommand = new HeaterChangeCommand();
-        if (Integer.parseInt(lastRecord.getTemperature()) >= command.getGoal()) {
+        if (Integer.parseInt(lastRecord.getTemperature()) > command.getGoal()) {
             motorChangeCommand.setStatus(SWITCH.ON);
             heaterChangeCommand.setStatus(SWITCH.OFF);
             motorService.change(motorChangeCommand);
             heaterService.change(heaterChangeCommand);
         }
-        if (Integer.parseInt(lastRecord.getTemperature()) <= command.getGoal()) {
+        if (Integer.parseInt(lastRecord.getTemperature()) < command.getGoal()) {
             motorChangeCommand.setStatus(SWITCH.OFF);
             heaterChangeCommand.setStatus(SWITCH.ON);
             motorService.change(motorChangeCommand);
             heaterService.change(heaterChangeCommand);
         }
-        temperatureGoalRepository.save(command.toEntity());
+        if (Integer.parseInt(lastRecord.getTemperature()) == command.getGoal()){
+            motorChangeCommand.setStatus(SWITCH.OFF);
+            heaterChangeCommand.setStatus(SWITCH.OFF);
+            motorService.change(motorChangeCommand);
+            heaterService.change(heaterChangeCommand);
+        }
+            temperatureGoalRepository.save(command.toEntity());
         response.setMessage("goal Saved.");
         response.setSuccess(true);
         return ResponseEntity.ok(response);
