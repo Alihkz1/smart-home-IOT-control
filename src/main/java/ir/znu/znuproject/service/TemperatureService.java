@@ -1,12 +1,15 @@
 package ir.znu.znuproject.service;
 
 import ir.znu.znuproject.command.Temperature.TemperatureChangeCommand;
+import ir.znu.znuproject.command.Temperature.TemperatureChangeGoalCommand;
 import ir.znu.znuproject.command.heater.HeaterChangeCommand;
 import ir.znu.znuproject.command.motor.MotorChangeCommand;
 import ir.znu.znuproject.enums.SWITCH;
 import ir.znu.znuproject.model.Temperature;
+import ir.znu.znuproject.model.TemperatureGoal;
 import ir.znu.znuproject.repository.HeaterRepository;
 import ir.znu.znuproject.repository.MotorRepository;
+import ir.znu.znuproject.repository.TemperatureGoalRepository;
 import ir.znu.znuproject.repository.TemperatureRepository;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TemperatureService {
     private final TemperatureRepository repository;
+    private final TemperatureGoalRepository temperatureGoalRepository;
     private final MotorService motorService;
     private final HeaterService heaterService;
     private final Response response;
@@ -25,12 +29,14 @@ public class TemperatureService {
             Response response,
             MotorService motorService,
             HeaterService heaterService,
-            TemperatureRepository repository
-            ) {
+            TemperatureRepository repository,
+            TemperatureGoalRepository temperatureGoalRepository
+    ) {
         this.response = response;
         this.repository = repository;
         this.motorService = motorService;
         this.heaterService = heaterService;
+        this.temperatureGoalRepository = temperatureGoalRepository;
     }
 
     public ResponseEntity<Response> change(TemperatureChangeCommand command) {
@@ -63,5 +69,17 @@ public class TemperatureService {
         repository.deleteAll();
         response.setMessage("temperature list cleared.");
         return ResponseEntity.ok(response);
+    }
+
+    public ResponseEntity<Response> changeGoal(TemperatureChangeGoalCommand command) {
+        temperatureGoalRepository.save(command.toEntity());
+        response.setMessage("goal Saved.");
+        response.setSuccess(true);
+        return ResponseEntity.ok(response);
+    }
+
+    public Integer goal() {
+        TemperatureGoal lastGoal = temperatureGoalRepository.getLast();
+        return lastGoal.getGoal();
     }
 }

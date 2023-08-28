@@ -1,6 +1,7 @@
 package ir.znu.znuproject.controller;
 
 import ir.znu.znuproject.command.Temperature.TemperatureChangeCommand;
+import ir.znu.znuproject.command.Temperature.TemperatureChangeGoalCommand;
 import ir.znu.znuproject.service.TemperatureService;
 import ir.znu.znuproject.shared.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,16 @@ public class TemperatureController {
     @PostMapping(path = "change")
     public ResponseEntity<Response> change(@RequestBody TemperatureChangeCommand command) {
         return temperatureService.change(command);
+    }
+
+    @PostMapping(path = "changegoal")
+    public ResponseEntity changeGoal(@RequestBody TemperatureChangeGoalCommand command) {
+        return temperatureService.changeGoal(command);
+    }
+
+    @GetMapping(path = "goal")
+    public Integer getGoal() {
+        return temperatureService.goal();
     }
 
     @GetMapping(path = "value")
