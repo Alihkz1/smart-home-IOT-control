@@ -1,5 +1,6 @@
 package ir.znu.znuproject.controller;
 
+import ir.znu.znuproject.command.Light.ChangeIntensityCommand;
 import ir.znu.znuproject.command.Light.LightChangeCommand;
 import ir.znu.znuproject.service.LightService;
 import ir.znu.znuproject.shared.Response;
@@ -27,6 +28,11 @@ public class LightController {
     @GetMapping(path = "intensity")
     public Integer intensity() {
         return lightService.intensity();
+    }
+
+    @PostMapping(path = "changeIntensity")
+    public ResponseEntity<Response> changeIntensity(@RequestBody ChangeIntensityCommand command) {
+        return lightService.changeIntensity(command);
     }
 
     @GetMapping(path = "status")

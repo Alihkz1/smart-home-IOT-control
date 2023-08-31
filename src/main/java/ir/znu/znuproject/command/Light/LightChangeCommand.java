@@ -13,7 +13,7 @@ public class LightChangeCommand {
     private SWITCH Status;
 
     @JsonProperty("Intensity")
-    private String Intensity = "";
+    private Integer Intensity = 0;
 
     @JsonProperty("Level")
     private Integer Level;

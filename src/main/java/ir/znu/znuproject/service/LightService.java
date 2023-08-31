@@ -1,5 +1,6 @@
 package ir.znu.znuproject.service;
 
+import ir.znu.znuproject.command.Light.ChangeIntensityCommand;
 import ir.znu.znuproject.command.Light.LightChangeCommand;
 import ir.znu.znuproject.model.Light;
 import ir.znu.znuproject.repository.LightRepository;
@@ -37,12 +38,19 @@ public class LightService {
 
     public Integer intensity() {
         Light light = repository.getLast();
-        return Integer.parseInt(light.getIntensity());
+        return light.getIntensity();
     }
 
     public ResponseEntity<Response> deleteAll() {
         repository.deleteAll();
         response.setMessage("light history cleared.");
         return ResponseEntity.ok(response);
+    }
+
+    public ResponseEntity<Response> changeIntensity(ChangeIntensityCommand command) {
+        Light lastRecord = repository.getLast();
+        lastRecord.setIntensity(command.getIntensity());
+        repository.save(lastRecord);
+        return ResponseEntity.ok().build();
     }
 }

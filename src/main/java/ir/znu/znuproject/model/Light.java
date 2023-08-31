@@ -22,7 +22,7 @@ public class Light {
     @Enumerated(EnumType.STRING)
     private SWITCH Status;
 
-    private String Intensity;
+    private Integer Intensity;
 
     @Column
     private Integer Level;
