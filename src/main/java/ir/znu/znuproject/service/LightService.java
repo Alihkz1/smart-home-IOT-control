@@ -29,9 +29,9 @@ public class LightService {
     public ResponseEntity<Response> change(LightChangeCommand command) {
         Log log = new Log();
         if (command.getStatus().equals(SWITCH.OFF)) {
-            log.setContent("Lights Turned OFF.");
+            log.setContent("Home Lights Turned Off.");
         } else if (command.getStatus().equals(SWITCH.ON)) {
-            log.setContent("Lights Turned On.");
+            log.setContent("Home Lights Turned On.");
         }
         logRepository.save(log);
         repository.save(command.toEntity());

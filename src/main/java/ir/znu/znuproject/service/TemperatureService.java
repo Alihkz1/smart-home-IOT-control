@@ -62,7 +62,7 @@ public class TemperatureService {
 
     public ResponseEntity<Response> changeGoal(TemperatureChangeGoalCommand command) {
         Log log = new Log();
-        log.setContent(String.format("Temperature goal moved to %s",command.getGoal()));
+        log.setContent(String.format("Temperature goal set to %s.",command.getGoal()));
         logRepository.save(log);
         Temperature lastRecord = repository.getLast();
         MotorChangeCommand motorChangeCommand = new MotorChangeCommand();
