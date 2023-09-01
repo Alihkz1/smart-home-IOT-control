@@ -27,7 +27,7 @@ public class LogService {
     }
 
     public ResponseEntity<Response<LogListDTO>> getAllLogs() {
-        List<LogDTO> logs = logRepository.findAll().stream().map(logDtoMapper).collect(Collectors.toList());
+        List<LogDTO> logs = logRepository.getAll().stream().map(logDtoMapper).collect(Collectors.toList());
         try {
             LogListDTO logListDto = LogListDTO.builder()
                     .logs(logs)
