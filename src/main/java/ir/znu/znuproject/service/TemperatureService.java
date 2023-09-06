@@ -45,6 +45,15 @@ public class TemperatureService {
         log.setContent(String.format("Temperature Changed to %s", command.getTemperature()));
         logRepository.save(log);
         repository.save(Temperature.builder().Temperature(command.getTemperature()).build());
+        TemperatureGoal lastGoal = temperatureGoalRepository.getLast();
+        MotorChangeCommand motorChangeCommand = new MotorChangeCommand();
+        HeaterChangeCommand heaterChangeCommand = new HeaterChangeCommand();
+        if(command.getTemperature().equals(lastGoal.getGoal())){
+            motorChangeCommand.setStatus(SWITCH.OFF);
+            heaterChangeCommand.setStatus(SWITCH.OFF);
+            motorService.change(motorChangeCommand);
+            heaterService.change(heaterChangeCommand);
+        }
         return ResponseEntity.ok(new Response());
     }
 
