@@ -10,5 +10,5 @@ import lombok.Setter;
 public class TemperatureChangeCommand {
     @NotNull
     @JsonProperty("Temperature")
-    private Integer Temperature;
+    private String Temperature;
 }

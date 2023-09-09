@@ -81,7 +81,8 @@ public class UserService {
     }
 
     public ResponseEntity<Response> login(LoginCommand user) {
-        User existUser = userRepository.login(user.getUsername());
+        String username = user.getUsername().toLowerCase();
+        User existUser = userRepository.login(username);
         if (existUser == null) {
             response.setSuccess(false);
             response.setMessage("incorrect username or password!");

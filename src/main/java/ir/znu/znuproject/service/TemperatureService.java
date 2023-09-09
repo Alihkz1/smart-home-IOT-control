@@ -57,7 +57,7 @@ public class TemperatureService {
         return ResponseEntity.ok(new Response());
     }
 
-    public Integer value() {
+    public String value() {
         Temperature temperature = repository.getLast();
         response.setData(temperature.getTemperature());
         return temperature.getTemperature();
@@ -76,19 +76,19 @@ public class TemperatureService {
         Temperature lastRecord = repository.getLast();
         MotorChangeCommand motorChangeCommand = new MotorChangeCommand();
         HeaterChangeCommand heaterChangeCommand = new HeaterChangeCommand();
-        if (lastRecord.getTemperature() > command.getGoal()) {
+        if ((int) Double.parseDouble(lastRecord.getTemperature()) > command.getGoal()) {
             motorChangeCommand.setStatus(SWITCH.ON);
             heaterChangeCommand.setStatus(SWITCH.OFF);
             motorService.change(motorChangeCommand);
             heaterService.change(heaterChangeCommand);
         }
-        if (lastRecord.getTemperature() < command.getGoal()) {
+        if ((int) Double.parseDouble(lastRecord.getTemperature()) < command.getGoal()) {
             motorChangeCommand.setStatus(SWITCH.OFF);
             heaterChangeCommand.setStatus(SWITCH.ON);
             motorService.change(motorChangeCommand);
             heaterService.change(heaterChangeCommand);
         }
-        if (lastRecord.getTemperature().equals(command.getGoal())) {
+        if ((int) Double.parseDouble(lastRecord.getTemperature()) == command.getGoal()) {
             motorChangeCommand.setStatus(SWITCH.OFF);
             heaterChangeCommand.setStatus(SWITCH.OFF);
             motorService.change(motorChangeCommand);

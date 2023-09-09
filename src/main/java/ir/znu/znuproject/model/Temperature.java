@@ -18,7 +18,7 @@ public class Temperature {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long RecordID;
 
-    private Integer Temperature;
+    private String Temperature;
 
     @Column(nullable = false)
     private Long date;

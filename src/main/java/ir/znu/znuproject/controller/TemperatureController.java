@@ -37,7 +37,7 @@ public class TemperatureController {
     }
 
     @GetMapping(path = "value")
-    public Integer value() {
+    public String value() {
         return temperatureService.value();
     }
 

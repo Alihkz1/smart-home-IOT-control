@@ -22,7 +22,7 @@ public class SignUpCommand {
 
     public User toEntity(String pass) {
         return User.builder()
-                .username(username)
+                .username(username.toLowerCase())
                 .name(name)
                 .password(pass)
                 .expireDate(LocalDate.of(LocalDate.now().getYear() + 1, LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth()))
