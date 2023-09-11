@@ -48,7 +48,7 @@ public class TemperatureService {
         TemperatureGoal lastGoal = temperatureGoalRepository.getLast();
         MotorChangeCommand motorChangeCommand = new MotorChangeCommand();
         HeaterChangeCommand heaterChangeCommand = new HeaterChangeCommand();
-        if(command.getTemperature().equals(lastGoal.getGoal())){
+        if((int) Double.parseDouble(command.getTemperature()) == lastGoal.getGoal()){
             motorChangeCommand.setStatus(SWITCH.OFF);
             heaterChangeCommand.setStatus(SWITCH.OFF);
             motorService.change(motorChangeCommand);
