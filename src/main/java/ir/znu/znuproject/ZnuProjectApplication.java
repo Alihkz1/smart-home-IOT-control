@@ -17,23 +17,8 @@ public class ZnuProjectApplication implements CommandLineRunner {
         SpringApplication.run(ZnuProjectApplication.class, args);
     }
 
-    private final UserRepository userRepository;
-    private final LogRepository logRepository;
-    private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public ZnuProjectApplication(UserRepository userRepository, LogRepository logRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.logRepository = logRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
-
     @Override
     public void run(String... args) throws Exception {
-//        User ali = new User("alien@gmail.com", passwordEncoder.encode("12345"), LocalDate.of(2001, 1, 18), Role.ADMIN);
-//        User omid = new User("omid@gmail.com", passwordEncoder.encode("12345"), LocalDate.of(2007, 3, 25), Role.ADMIN);
-//        userRepository.saveAll(List.of(ali, omid));
-//        Log fistLog = new Log("light turned on by user", LocalDate.of(2023, 03, 20));
-//        logRepository.saveAll(List.of(fistLog));
+
     }
 }

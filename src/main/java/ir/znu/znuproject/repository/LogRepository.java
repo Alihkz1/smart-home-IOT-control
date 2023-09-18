@@ -9,7 +9,6 @@ import java.util.List;
 
 @Repository
 public interface LogRepository extends JpaRepository<Log, Long> {
-
     @Query(value = "SELECT * FROM logs ORDER BY ID DESC", nativeQuery = true)
     public List<Log> getAll();
 }
